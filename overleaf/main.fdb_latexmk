@@ -1,13 +1,13 @@
 # Fdb version 3
-["biber main"] 1768149076 "main.bcf" "main.bbl" "main" 1768149113
-  "main.bcf" 1768149112 111007 dbf9f69710da0bd3f8c68ceac6269aff "pdflatex"
+["biber main"] 1768149432 "main.bcf" "main.bbl" "main" 1768149736
+  "main.bcf" 1768149735 110903 af09ea95c359e726a4afca4eec663067 "pdflatex"
   "references.bib" 1768148192 10315 91f1e2fd881d4cf13a372bdda96e5914 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1768149101 "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" "main.pdf" "main" 1768149113
+["pdflatex"] 1768149724 "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" "main.pdf" "main" 1768149736
   "/etc/texmf/web2c/texmf.cnf" 1732966747 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" 1768149062 46403 fb545cee997ea94686f427c5a1c6cb70 ""
+  "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" 1768149701 41606 0c771916d324ae5f338b0bea2876d4fe ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -217,6 +217,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/ragged2e/ragged2e.sty" 1639603888 9244 53da791cc5f775633a8a852b08533fe2 ""
   "/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty" 1576624809 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1575674187 9715 b051d5b493d9fe5f4bc251462d039e5f ""
+  "/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty" 1625518490 48833 3b7b4cfab1a3d15596bfd3772a77ab65 ""
   "/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty" 1636758526 12694 6c23725d50ab9d1e2d3ce482c58ffcf3 ""
   "/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty" 1622581934 7147 5ac8a9ef36411064b1a501137af0fa54 ""
   "/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty" 1622581934 7392 39729ae6a807e217edf1442cf8fab2c2 ""
@@ -232,13 +233,13 @@
   "geocells_map/cell_distribution_finetuned_both.png" 1766743215 141909 dbb7296dda407a7fe7b327dea9434ec3 ""
   "geocells_map/geocells_map_finetuned_both.png" 1766743215 4420273 b4ed8aac56c3d72a67f04432bb5517ed ""
   "logo/logoUvA_en.pdf" 1766722088 9956 8b484410a3b005c3081765caf4d4e6dd ""
-  "main.atfi" 1768149112 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1768149112 17931 cbec82056fb23e7a1fa663a7f0b817d9 "pdflatex"
-  "main.bbl" 1768149077 53567 e2707442257a286c9b06e54b70dca1f2 "biber main"
-  "main.out" 1768149112 3400 1975b2144cca788ecb5b7862326feca7 "pdflatex"
-  "main.run.xml" 1768149112 2355 f8a7ea4eed03fb7e1a549c00c2df8aeb "pdflatex"
-  "main.tex" 1768149062 46403 fb545cee997ea94686f427c5a1c6cb70 ""
-  "main.toc" 1768149112 1696 5e2e076107103dd30994d18977ee2416 "pdflatex"
+  "main.atfi" 1768149735 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1768149735 19588 aa8a719553377f5b6848ef9e6c3ddf29 "pdflatex"
+  "main.bbl" 1768149433 52472 8be0e49fcb82ac02d289c00d8d4d39bf "biber main"
+  "main.out" 1768149735 5857 349454141189c6a0a09d6344c58f04d3 "pdflatex"
+  "main.run.xml" 1768149735 2355 f8a7ea4eed03fb7e1a549c00c2df8aeb "pdflatex"
+  "main.tex" 1768149701 41606 0c771916d324ae5f338b0bea2876d4fe ""
+  "main.toc" 1768149735 2991 0698e819add003a4af72cc7a5450c123 "pdflatex"
   "round_01_110135_concepts.png" 1767949817 5107692 7e94125a15b5417a392b9abaa4a9d012 ""
   "round_09_110825_concepts.png" 1767949180 3431114 fa2dfdd94df4c1b6e9e5c3c1a2442ca4 ""
   "uva-inf-article.cls" 1766748209 7723 b7ea755e25db5c398df17f4ae00866f3 ""

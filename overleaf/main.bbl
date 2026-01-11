@@ -19,32 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
-    \entry{geoguessr}{misc}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=e249b5c5bc615c5b0a7b874f89e88250}{%
-           family={AB},
-           familyi={A\bibinitperiod},
-           given={GeoGuessr},
-           giveni={G\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \strng{fullhash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \strng{bibnamehash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \strng{authorbibnamehash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \strng{authornamehash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \strng{authorfullhash}{e249b5c5bc615c5b0a7b874f89e88250}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.geoguessr.com}}
-      \field{note}{Accessed: 2025-01-07}
-      \field{title}{GeoGuessr - A Geography Discovery Game}
-      \field{year}{2013}
-    \endentry
     \entry{arevalo2017gated}{inproceedings}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=035772fed05c7b5be963bbbf4e933f81}{%
