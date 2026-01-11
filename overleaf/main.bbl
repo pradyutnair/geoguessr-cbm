@@ -347,6 +347,71 @@
       \field{title}{S2 Geometry Library}
       \field{year}{2021}
     \endentry
+    \entry{jia2025interpretable}{misc}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=335880e77ca7326e9c3430ff64f0d5dd}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Furong},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9761917ed5ed21a5b5bad09ff370ebab}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Lanxin},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4ab000c9e95e5844c5e08488a33d892}{%
+           family={Hou},
+           familyi={H\bibinitperiod},
+           given={Ce},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ae021641a8f85fd2607152ab99ed115b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Fan},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b277313b188bbb413db8702bc7a7d4f}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Xinyan},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=93c82128aca25c57cfb17e90d02136d5}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{47786282cf4896a7919a565934c51b5b}
+      \strng{fullhash}{e7ad715bcb42749809db216bc7cd3e15}
+      \strng{bibnamehash}{47786282cf4896a7919a565934c51b5b}
+      \strng{authorbibnamehash}{47786282cf4896a7919a565934c51b5b}
+      \strng{authornamehash}{47786282cf4896a7919a565934c51b5b}
+      \strng{authorfullhash}{e7ad715bcb42749809db216bc7cd3e15}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CV}
+      \field{eprinttype}{arXiv}
+      \field{title}{Towards Interpretable Geo-localization: a Concept-Aware Global Image-GPS Alignment Framework}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2509.01910
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2509.01910
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2509.01910
+      \endverb
+    \endentry
     \entry{koh2020concept}{inproceedings}{}
       \name{author}{7}{}{%
         {{un=0,uniquepart=base,hash=b7309d5979903f9e56ec43ebf0d594ad}{%
