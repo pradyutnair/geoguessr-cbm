@@ -16,8 +16,8 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 
-% Reduce top margin on first page to fit abstract
-% \newgeometry{top=20mm, bottom=30mm, left=30mm, right=30mm}
+% Reduce top margin on first page
+% \newgeometry{top=25mm, bottom=25mm, left=30mm, right=30mm}
 
 \usepackage[style=authoryear-comp]{biblatex}
 \addbibresource{references.bib}
@@ -37,7 +37,7 @@
 \authors{Pradyut Nair}
 \uvanetids{15558169}
 
-\mentor{Nanne van Noord}
+%\mentor{Nanne van Noord}
 \docent{}
 
 %\group{AI Research Group}
@@ -50,10 +50,15 @@
 
 \begin{document}
 \maketitle
+%\restoregeometry
 
-\restoregeometry  % Restore normal margins after title page
-
+\begingroup
+\setlength{\parskip}{0pt}
+\setlength{\baselineskip}{0.9\baselineskip}
 \tableofcontents
+\endgroup
+\pagebreak
+
 \begin{abstract}
 Image geolocation, the task of predicting geographic coordinates from visual input, remains challenging due to the inherent ambiguity of similar-looking scenes across different regions. While existing approaches achieve reasonable accuracy through end-to-end learning, they operate as black boxes, providing little insight into \textit{why} a particular location is predicted. This work presents a Concept-Aware Geolocation system that learns interpretable semantic concepts as an intermediate representation for location prediction. We propose a three-stage curriculum learning pipeline combining domain-specific contrastive pretraining, hierarchical text-anchored concept learning, and cross-attention-based geolocation. Our architecture enforces a strict concept bottleneck, ensuring all predictions flow through human-interpretable semantic concepts. Experiments on a 43,000-image street view dataset demonstrate that our approach achieves a median error of 126 km on in-distribution data and 350 km on out-of-distribution GeoGuessr images, while providing patch-level attention maps that reveal which visual regions support concept-based predictions.
 \end{abstract}

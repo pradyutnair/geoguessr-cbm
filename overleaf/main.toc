@@ -1,33 +1,33 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
 \contentsline {section}{\numberline {2}Related Work}{3}{section.2}%
-\contentsline {section}{\numberline {3}Methodology}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Geocell Generation}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {3}Methodology}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Geocell Generation}{4}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Stage 0: Domain Contrastive Pretraining}{5}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}GPS Adapter}{5}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Concept Bottleneck Projection}{6}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Prototype Projection}{6}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Alignment Objectives}{6}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.2}Concept Bottleneck Projection}{5}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Prototype Projection}{5}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Alignment Objectives}{5}{subsubsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.4}Stage 1: Text-Prototype Concept Learning}{6}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Text-Anchored Prototypes}{7}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}Cosine Similarity Classification}{7}{subsubsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.3}Concept Bottleneck Options}{7}{subsubsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4}Training Objectives}{7}{subsubsection.3.4.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Text-Anchored Prototypes}{6}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Cosine Similarity Classification}{6}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Concept Bottleneck Options}{6}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Training Objectives}{6}{subsubsection.3.4.4}%
 \contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{7}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Cross-Attention for Spatial Context}{8}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Learned Gating Mechanism}{8}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}Prediction Heads}{8}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.1}Cross-Attention for Spatial Context}{7}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Learned Gating Mechanism}{7}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Prediction Heads}{7}{subsubsection.3.5.3}%
 \contentsline {section}{\numberline {4}Experiments}{8}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{8}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{9}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{9}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{10}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}External GeoGuessr Dataset Evaluation}{10}{subsubsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{9}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}External GeoGuessr Dataset Evaluation}{9}{subsubsection.4.4.1}%
 \contentsline {subsubsection}{\numberline {4.4.2}GeoGuessr Game Evaluation}{10}{subsubsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{11}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Gate Value Analysis}{11}{subsubsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{10}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Gate Value Analysis}{10}{subsubsection.4.5.1}%
 \contentsline {subsubsection}{\numberline {4.5.2}Example Prediction Analysis}{11}{subsubsection.4.5.2}%
 \contentsline {section}{\numberline {5}Discussion}{11}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}%
-\contentsline {section}{\numberline {A}Detailed Interpretability Examples}{14}{appendix.A}%
+\contentsline {section}{\numberline {6}Conclusion}{11}{section.6}%
+\contentsline {section}{\numberline {A}Detailed Interpretability Examples}{13}{appendix.A}%
