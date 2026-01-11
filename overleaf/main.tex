@@ -227,7 +227,7 @@ K &= V = W_P \cdot P \in \mathbb{R}^{576 \times 512} \quad (\text{projected patc
 \end{align}
 where $W_P \in \mathbb{R}^{512 \times 1024}$ projects patch tokens to the concept embedding dimension. The attention weights can be reshaped to a $24 \times 24$ spatial map, providing interpretable visualization of which image regions most strongly support the prediction.
 
-\textbf{Learned Gating Mechanism.} The key innovation is how we combine the concept embedding with the cross-attention output. Rather than simple concatenation or addition, we use a learned gate that controls the contribution of each information source:
+\textbf{Learned Gating Mechanism.} The key innovation is how we combine the concept embedding with the cross-attention output. Rather than simple concatenation or addition, we use a learned gate that controls the contribution of each information source \parencite{srivastava2015highway, arevalo2017gated}:
 \begin{align}
 z_{\text{spatial}} &= \text{FFN}(\text{LayerNorm}(z + \text{attn})) \in \mathbb{R}^{512} \\
 z_{\text{combined}} &= \text{concat}(z, z_{\text{spatial}}) \in \mathbb{R}^{1024} \\
@@ -235,9 +235,7 @@ g &= \sigma(W_g \cdot z_{\text{combined}}) \in \mathbb{R}^{512}, \quad g \in [0,
 z_{\text{gated}} &= g \odot z + (1 - g) \odot z_{\text{spatial}} \\
 z_{\text{final}} &= \text{FusionMLP}(\text{concat}(z, z_{\text{gated}}))
 \end{align}
-where $\sigma$ is the sigmoid function, $\odot$ is element-wise multiplication, and $g$ is a 512-dimensional gate vector. Each dimension independently learns to balance concept versus spatial information.
-
-\textbf{Gate Interpretation.} The gate values provide interpretability:
+where $\sigma$ is the sigmoid function, $\odot$ is element-wise multiplication, and $g$ is a 512-dimensional gate vector. Following feature-wise gating approaches \parencite{perez2018film}, each dimension independently learns to balance concept versus spatial information. The gate values provide interpretability:
 \begin{enumerate}
     \setlength{\itemsep}{0pt}
     \item When $g_d \approx 1$: The $d$-th dimension relies primarily on concept information
@@ -250,8 +248,8 @@ The learned gating mechanism adaptively balances concept and spatial information
 \textbf{Prediction Heads.} Two prediction heads operate on the final fused embedding $z_{\text{final}}$:
 \begin{enumerate}
     \setlength{\itemsep}{0pt}
-    \item Cell Head: Softmax classification over 1,048 geocells
-    \item Offset Head: MSE regression predicting 3D Cartesian offset from cell center
+    \item \textbf{Cell Head}: Softmax classification over 1,048 geocells
+    \item \textbf{Offset Head}: MSE regression predicting 3D Cartesian offset from cell center
 \end{enumerate}
 
 The total Stage 2 loss combines cell classification cross-entropy and offset regression MSE:
@@ -269,18 +267,11 @@ Stage 2 trains for 30 epochs with batch size 32, learning rate $1 \times 10^{-4}
 \section{Experiments}
 \label{sec:experiments}
 
-We evaluate our approach on both in-distribution test data and an out-of-distribution GeoGuessr dataset to assess generalization. All experiments compare two model variants: vanilla (Stage 1 and 2 only, without Stage 0 pretraining) and finetuned (complete three-stage pipeline with Stage 0 pretraining).
+We evaluate our approach on both in-distribution test data and an out-of-distribution GeoGuessr dataset to assess generalization. All experiments compare two model variants: vanilla (Stage 1 and 2 using default pretrained StreetCLIP only, without Stage 0 pretraining) and finetuned (complete three-stage pipeline with Stage 0 pretraining).
 
 \subsection{Evaluation Metrics}
 
-For concept classification (Stage 1), we report top-1 and top-5 accuracy for both child and parent concepts. For geolocation (Stage 2), we report median and mean haversine distance error in kilometers, geocell classification accuracy, and threshold accuracies at standard geographic scales:
-\begin{enumerate}
-    \setlength{\itemsep}{0pt}
-    \item Street: within 1 km
-    \item City: within 25 km
-    \item Region: within 200 km
-    \item Country: within 750 km
-\end{enumerate}
+For concept classification (Stage 1), we report top-1 and top-5 accuracy for both child and parent concepts. For geolocation (Stage 2), we report median and mean haversine distance error in kilometers, geocell classification accuracy, and threshold accuracies at standard geographic scales: Street (within 1 km), City (within 25 km), Region (within 200 km), and Country (within 750 km).
 
 \subsection{Stage 1: Concept Classification Results}
 
@@ -301,8 +292,6 @@ Finetuned & \textbf{46.1\%} & \textbf{48.0\%} & \textbf{71.6\%} & \textbf{72.5\%
 \end{table}
 
 Both variants achieve comparable child concept accuracy around 46\%, reflecting the challenge of distinguishing among approximately 100 fine-grained categories. The finetuned variant shows notably improved parent concept accuracy (48.0\% vs 38.6\%), suggesting that Stage 0 pretraining helps learn the hierarchical concept structure. Top-5 accuracies exceed 70\% for both levels, indicating that the correct concept typically ranks highly even when not the top prediction.
-
-Accuracy varies substantially across concepts, with common categories like ``Urban Street'' achieving higher accuracy than rare categories due to training data distribution.
 
 \subsection{Stage 2: Geolocation Results}
 
@@ -345,7 +334,7 @@ To assess generalization beyond our compiled dataset, we evaluate our approach o
 
 \subsubsection{External GeoGuessr Dataset Evaluation}
 
-We evaluate on a publicly available GeoGuessr dataset \parencite{fren-gor-geoguessr} containing 5,477 street view images with associated ground truth locations. Table~\ref{tab:stage2_hf} presents results on this static benchmark.
+We evaluate on a publicly available GeoGuessr dataset \parencite{fren-gor-geoguessr} containing 5,478 street view images with associated ground truth locations. Table~\ref{tab:stage2_hf} presents results on this static benchmark.
 
 \begin{table}[h!]
 \centering

@@ -45,6 +45,49 @@
       \field{title}{GeoGuessr - A Geography Discovery Game}
       \field{year}{2013}
     \endentry
+    \entry{arevalo2017gated}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=035772fed05c7b5be963bbbf4e933f81}{%
+           family={Arevalo},
+           familyi={A\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b47889ad94571547c92970150485798b}{%
+           family={Solorio},
+           familyi={S\bibinitperiod},
+           given={Thamar},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1e8f2ea50b3b96d6cea45e842b8cbdfe}{%
+           family={Montes-y-Gómez},
+           familyi={M\bibinithyphendelim y\bibinithyphendelim G\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d965398c4a824312ce2acdacfda98b44}{%
+           family={González},
+           familyi={G\bibinitperiod},
+           given={Fabio\bibnamedelima A},
+           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ba72bfa23e5466fe8f595ca3a3043562}
+      \strng{fullhash}{3e5163c9a68980adb35996face591bfd}
+      \strng{bibnamehash}{ba72bfa23e5466fe8f595ca3a3043562}
+      \strng{authorbibnamehash}{ba72bfa23e5466fe8f595ca3a3043562}
+      \strng{authornamehash}{ba72bfa23e5466fe8f595ca3a3043562}
+      \strng{authorfullhash}{3e5163c9a68980adb35996face591bfd}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Learning Representations (ICLR) Workshop}
+      \field{title}{Gated Multimodal Units for Information Fusion}
+      \field{year}{2017}
+    \endentry
     \entry{astruc2024omniloc}{article}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -200,6 +243,29 @@
       \field{booktitle}{International Conference on Machine Learning (ICML)}
       \field{title}{Interactive Concept Bottleneck Models}
       \field{year}{2023}
+    \endentry
+    \entry{fren-gor-geoguessr}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=944f38e05cd1b18036c124834914d125}{%
+           family={fren-gor},
+           familyi={f\bibinithyphendelim g\bibinitperiod}}}%
+      }
+      \strng{namehash}{944f38e05cd1b18036c124834914d125}
+      \strng{fullhash}{944f38e05cd1b18036c124834914d125}
+      \strng{bibnamehash}{944f38e05cd1b18036c124834914d125}
+      \strng{authorbibnamehash}{944f38e05cd1b18036c124834914d125}
+      \strng{authornamehash}{944f38e05cd1b18036c124834914d125}
+      \strng{authorfullhash}{944f38e05cd1b18036c124834914d125}
+      \field{sortinit}{f}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://huggingface.co/datasets/fren-gor/geoguessr-locations}}
+      \field{note}{Hugging Face Dataset}
+      \field{title}{GeoGuessr Locations Dataset}
+      \field{year}{2024}
     \endentry
     \entry{streetclip2023}{article}{}
       \name{author}{3}{}{%
@@ -717,6 +783,58 @@
       \field{title}{Representation Learning with Contrastive Predictive Coding}
       \field{year}{2018}
     \endentry
+    \entry{perez2018film}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=79978685fd7b37606022b06c0f6419a1}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={Ethan},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=742551419d9c216e1ae7e6bf61ee348c}{%
+           family={Vries},
+           familyi={V\bibinitperiod},
+           given={Harm},
+           giveni={H\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod},
+           prefixun=0}}%
+        {{un=0,uniquepart=base,hash=c3af936a4e6dd4b0086458a45dfac6da}{%
+           family={Strub},
+           familyi={S\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1328d3ceef6add8461994fc364c664df}{%
+           family={Dumoulin},
+           familyi={D\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ccec1ccd2e1aa86960eb2e872c6b7020}{%
+           family={Courville},
+           familyi={C\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e27a95b1212beb87546ed77c5ec8b570}
+      \strng{fullhash}{bb52d2a8e688170a411c10eaae28ae42}
+      \strng{bibnamehash}{e27a95b1212beb87546ed77c5ec8b570}
+      \strng{authorbibnamehash}{e27a95b1212beb87546ed77c5ec8b570}
+      \strng{authornamehash}{e27a95b1212beb87546ed77c5ec8b570}
+      \strng{authorfullhash}{bb52d2a8e688170a411c10eaae28ae42}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Learning Representations (ICLR)}
+      \field{title}{Feature-wise Linear Modulation}
+      \field{year}{2018}
+    \endentry
     \entry{radford2021learning}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -845,6 +963,43 @@
       \field{journaltitle}{arXiv preprint arXiv:1808.02130}
       \field{title}{CPlaNet: Enhancing Image Geolocalization by Combinatorial Partitioning of Maps}
       \field{year}{2018}
+    \endentry
+    \entry{srivastava2015highway}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6397df99520f6918e6e2791bae8a9468}{%
+           family={Srivastava},
+           familyi={S\bibinitperiod},
+           given={Rupesh\bibnamedelima Kumar},
+           giveni={R\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7690d8de5e14a38203ad5706d6dd4eb}{%
+           family={Greff},
+           familyi={G\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=288bdbcfe1b91ad7484d7a24f74f99ed}{%
+           family={Schmidhuber},
+           familyi={S\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \strng{fullhash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \strng{bibnamehash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \strng{authorbibnamehash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \strng{authornamehash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \strng{authorfullhash}{10ae49cb55cd10956f84d7d805dfe58b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Machine Learning (ICML) Deep Learning Workshop}
+      \field{title}{Highway Networks}
+      \field{year}{2015}
     \endentry
     \entry{toker2021satellite_cvpr}{inproceedings}{}
       \name{author}{3}{}{%
@@ -1151,7 +1306,6 @@
       \field{year}{2022}
     \endentry
   \enddatalist
-  \missing{fren-gor-geoguessr}
 \endrefsection
 \endinput
 
