@@ -22,10 +22,8 @@
 \babel@aux{english}{}
 \abx@aux@cite{0}{hays2008im2gps}
 \abx@aux@segm{0}{0}{hays2008im2gps}
-\abx@aux@cite{0}{li2020visual}
-\abx@aux@segm{0}{0}{li2020visual}
-\abx@aux@cite{0}{astruc2024omniloc}
-\abx@aux@segm{0}{0}{astruc2024omniloc}
+\abx@aux@cite{0}{li2024visual}
+\abx@aux@segm{0}{0}{li2024visual}
 \abx@aux@cite{0}{hays2008im2gps}
 \abx@aux@segm{0}{0}{hays2008im2gps}
 \abx@aux@cite{0}{weyand2016planet}
@@ -61,7 +59,11 @@
 \abx@aux@page{5}{2}
 \abx@aux@page{6}{2}
 \abx@aux@page{7}{2}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Visual Geolocation.}{2}{section.2}\protected@file@percent }
 \abx@aux@page{8}{2}
+\abx@aux@page{9}{2}
 \abx@aux@cite{0}{radford2021learning}
 \abx@aux@segm{0}{0}{radford2021learning}
 \abx@aux@cite{0}{streetclip2023}
@@ -84,12 +86,6 @@
 \abx@aux@segm{0}{0}{jia2025interpretable}
 \abx@aux@cite{0}{bengio2009curriculum}
 \abx@aux@segm{0}{0}{bengio2009curriculum}
-\abx@aux@cite{0}{learnablemeta}
-\abx@aux@segm{0}{0}{learnablemeta}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
-\newlabel{sec:related}{{2}{3}{Related Work}{section.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Visual Geolocation.}{3}{section.2}\protected@file@percent }
-\abx@aux@page{9}{3}
 \abx@aux@page{10}{3}
 \abx@aux@page{11}{3}
 \abx@aux@page{12}{3}
@@ -107,47 +103,58 @@
 \abx@aux@page{22}{3}
 \abx@aux@page{23}{3}
 \abx@aux@page{24}{3}
+\abx@aux@page{25}{3}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{3}{section.3}\protected@file@percent }
 \newlabel{sec:methodology}{{3}{3}{Methodology}{section.3}{}}
-\abx@aux@page{25}{3}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{3}{subsection.3.1}\protected@file@percent }
 \abx@aux@page{26}{3}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:stage0}{{1a}{4}{Stage 0: Domain Contrastive Pretraining\relax }{figure.caption.1}{}}
+\newlabel{sub@fig:stage0}{{a}{4}{Stage 0: Domain Contrastive Pretraining\relax }{figure.caption.1}{}}
+\newlabel{fig:stage1_2}{{1b}{4}{Stage 1: Concept Learning and Stage 2: Geolocation\relax }{figure.caption.1}{}}
+\newlabel{sub@fig:stage1_2}{{b}{4}{Stage 1: Concept Learning and Stage 2: Geolocation\relax }{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual overview of the three-stage architecture for concept-aware geolocation. \textbf  {(a) Stage 0} performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text  {d} \to 768\text  {d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf  {(b) Stage 1} learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf  {Stage 2} predicts geographic coordinates via learned gated fusion: concept embeddings and image embeddings are combined through cross-attention and a cell classification head with offset regression.\relax }}{4}{figure.caption.1}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{4}{Conceptual overview of the three-stage architecture for concept-aware geolocation. \textbf {(a) Stage 0} performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text {d} \to 768\text {d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf {(b) Stage 1} learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf {Stage 2} predicts geographic coordinates via learned gated fusion: concept embeddings and image embeddings are combined through cross-attention and a cell classification head with offset regression.\relax }{figure.caption.1}{}}
+\abx@aux@cite{0}{learnablemeta}
+\abx@aux@segm{0}{0}{learnablemeta}
 \abx@aux@cite{0}{s2geometry}
 \abx@aux@segm{0}{0}{s2geometry}
 \abx@aux@cite{0}{biljecki2021street}
 \abx@aux@segm{0}{0}{biljecki2021street}
 \abx@aux@cite{0}{wang2025street}
 \abx@aux@segm{0}{0}{wang2025street}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Three-stage architecture for concept-aware geolocation. \textbf  {Stage 0} (top) performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text  {d} \to 768\text  {d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf  {Stage 1} (middle) learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf  {Stage 2} (bottom) predicts geographic coordinates via learned gated fusion: concept embeddings query image patches through cross-attention to extract spatial context, then a learned gate balances concept versus spatial information for each dimension.\relax }}{4}{figure.caption.1}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:architecture}{{1}{4}{Three-stage architecture for concept-aware geolocation. \textbf {Stage 0} (top) performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text {d} \to 768\text {d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf {Stage 1} (middle) learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf {Stage 2} (bottom) predicts geographic coordinates via learned gated fusion: concept embeddings query image patches through cross-attention to extract spatial context, then a learned gate balances concept versus spatial information for each dimension.\relax }{figure.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Examples of GeoGuessr metas: distinctive visual patterns that help identify geographic locations. These may include unique road markings, vehicle types, vegetation patterns, or infrastructure elements specific to certain countries or regions.\relax }}{4}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:meta_examples}{{2}{4}{Examples of GeoGuessr metas: distinctive visual patterns that help identify geographic locations. These may include unique road markings, vehicle types, vegetation patterns, or infrastructure elements specific to certain countries or regions.\relax }{figure.caption.2}{}}
-\abx@aux@cite{0}{oord2018infonce}
-\abx@aux@segm{0}{0}{oord2018infonce}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Geocell Generation}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{5}{subsection.3.1}\protected@file@percent }
 \abx@aux@page{27}{5}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Examples of GeoGuessr metas: distinctive visual patterns that help identify geographic locations. These may include unique road markings, vehicle types, vegetation patterns, or infrastructure elements specific to certain countries or regions.\relax }}{5}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:meta_examples}{{2}{5}{Examples of GeoGuessr metas: distinctive visual patterns that help identify geographic locations. These may include unique road markings, vehicle types, vegetation patterns, or infrastructure elements specific to certain countries or regions.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Geocell Generation}{5}{subsection.3.2}\protected@file@percent }
 \abx@aux@page{28}{5}
 \abx@aux@page{29}{5}
-\newlabel{fig:geocells_map}{{3a}{5}{Voronoi tessellation of geocells showing cell centers (red markers) and their boundaries. Cell density adapts to regional data availability.\relax }{figure.caption.3}{}}
-\newlabel{sub@fig:geocells_map}{{a}{5}{Voronoi tessellation of geocells showing cell centers (red markers) and their boundaries. Cell density adapts to regional data availability.\relax }{figure.caption.3}{}}
-\newlabel{fig:geocells_dist}{{3b}{5}{Distribution of geocells by latitude (left) and hemisphere (right), showing concentration in northern populated regions.\relax }{figure.caption.3}{}}
-\newlabel{sub@fig:geocells_dist}{{b}{5}{Distribution of geocells by latitude (left) and hemisphere (right), showing concentration in northern populated regions.\relax }{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Adaptive geocell generation through per-country K-means clustering in 3D Cartesian space. The 1,048 geocells provide finer granularity in data-dense regions while maintaining global coverage.\relax }}{5}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:geocells}{{3}{5}{Adaptive geocell generation through per-country K-means clustering in 3D Cartesian space. The 1,048 geocells provide finer granularity in data-dense regions while maintaining global coverage.\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Stage 0: Domain Contrastive Pretraining}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{GPS Adapter.}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Concept Bottleneck Projection.}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Prototype Projection.}{5}{equation.3.1}\protected@file@percent }
+\abx@aux@page{30}{5}
+\abx@aux@cite{0}{oord2018infonce}
+\abx@aux@segm{0}{0}{oord2018infonce}
+\newlabel{fig:geocells_map}{{3a}{6}{Voronoi tessellation of geocells showing cell centers (red markers) and their boundaries. Cell density adapts to regional data availability.\relax }{figure.caption.3}{}}
+\newlabel{sub@fig:geocells_map}{{a}{6}{Voronoi tessellation of geocells showing cell centers (red markers) and their boundaries. Cell density adapts to regional data availability.\relax }{figure.caption.3}{}}
+\newlabel{fig:geocells_dist}{{3b}{6}{Distribution of geocells by latitude (left) and hemisphere (right), showing concentration in northern populated regions.\relax }{figure.caption.3}{}}
+\newlabel{sub@fig:geocells_dist}{{b}{6}{Distribution of geocells by latitude (left) and hemisphere (right), showing concentration in northern populated regions.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Adaptive geocell generation through per-country K-means clustering in 3D Cartesian space. The 1,048 geocells provide finer granularity in data-dense regions while maintaining global coverage.\relax }}{6}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:geocells}{{3}{6}{Adaptive geocell generation through per-country K-means clustering in 3D Cartesian space. The 1,048 geocells provide finer granularity in data-dense regions while maintaining global coverage.\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Stage 0: Domain Contrastive Pretraining}{6}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{GPS Adapter.}{6}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Concept Bottleneck Projection.}{6}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prototype Projection.}{6}{equation.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Alignment Objectives.}{6}{equation.3.2}\protected@file@percent }
-\abx@aux@page{30}{6}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Stage 1: Text-Prototype Concept Learning}{6}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Text-Anchored Prototypes.}{6}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Cosine Similarity Classification.}{6}{equation.3.7}\protected@file@percent }
+\abx@aux@page{31}{6}
 \abx@aux@cite{0}{lin2017focal}
 \abx@aux@segm{0}{0}{lin2017focal}
 \abx@aux@cite{0}{loshchilov2017adamw}
 \abx@aux@segm{0}{0}{loshchilov2017adamw}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Stage 1: Text-Prototype Concept Learning}{7}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Text-Anchored Prototypes.}{7}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cosine Similarity Classification.}{7}{equation.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Concept Bottleneck Options.}{7}{equation.3.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Training Objectives.}{7}{equation.3.9}\protected@file@percent }
+\abx@aux@page{32}{7}
+\abx@aux@page{33}{7}
 \abx@aux@cite{0}{vaswani2017attention}
 \abx@aux@segm{0}{0}{vaswani2017attention}
 \abx@aux@cite{0}{srivastava2015highway}
@@ -156,94 +163,97 @@
 \abx@aux@segm{0}{0}{arevalo2017gated}
 \abx@aux@cite{0}{perez2018film}
 \abx@aux@segm{0}{0}{perez2018film}
-\@writefile{toc}{\contentsline {paragraph}{Concept Bottleneck Options.}{7}{equation.3.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Training Objectives.}{7}{equation.3.9}\protected@file@percent }
-\abx@aux@page{31}{7}
-\abx@aux@page{32}{7}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{7}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Cross-Attention for Spatial Context.}{7}{subsection.3.5}\protected@file@percent }
-\abx@aux@page{33}{7}
-\@writefile{toc}{\contentsline {paragraph}{Learned Gating Mechanism.}{7}{equation.3.14}\protected@file@percent }
-\abx@aux@page{34}{7}
-\abx@aux@page{35}{7}
-\abx@aux@page{36}{7}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{8}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cross-Attention for Spatial Context.}{8}{subsection.3.5}\protected@file@percent }
+\abx@aux@page{34}{8}
+\@writefile{toc}{\contentsline {paragraph}{Learned Gating Mechanism.}{8}{equation.3.14}\protected@file@percent }
+\abx@aux@page{35}{8}
+\abx@aux@page{36}{8}
+\abx@aux@page{37}{8}
 \@writefile{toc}{\contentsline {paragraph}{Prediction Heads.}{8}{equation.3.19}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{8}{section.4}\protected@file@percent }
 \newlabel{sec:experiments}{{4}{8}{Experiments}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{8}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{8}{subsection.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }}{8}{table.caption.4}\protected@file@percent }
-\newlabel{tab:stage1}{{1}{8}{Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }{table.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{9}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{9}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }}{9}{table.caption.4}\protected@file@percent }
+\newlabel{tab:stage1}{{1}{9}{Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{9}{subsection.4.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Stage 2 geolocation performance on the in-distribution test split. The finetuned variant with gated fusion (``both'') achieves the best median error of 126 km by adaptively combining concept and spatial information.\relax }}{9}{table.caption.5}\protected@file@percent }
 \newlabel{tab:stage2_test}{{2}{9}{Stage 2 geolocation performance on the in-distribution test split. The finetuned variant with gated fusion (``both'') achieves the best median error of 126 km by adaptively combining concept and spatial information.\relax }{table.caption.5}{}}
-\newlabel{fig:stage2_test_visual}{{4a}{9}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:stage2_test_visual}{{a}{9}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
-\newlabel{fig:stage2_hf_visual}{{4b}{9}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:stage2_hf_visual}{{b}{9}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }}{9}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:stage2_visual_results}{{4}{9}{Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{9}{subsection.4.4}\protected@file@percent }
 \abx@aux@cite{0}{fren-gor-geoguessr}
 \abx@aux@segm{0}{0}{fren-gor-geoguessr}
+\newlabel{fig:stage2_test_visual}{{4a}{10}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:stage2_test_visual}{{a}{10}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
+\newlabel{fig:stage2_hf_visual}{{4b}{10}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:stage2_hf_visual}{{b}{10}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }}{10}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:stage2_visual_results}{{4}{10}{Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{10}{subsection.4.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{External GeoGuessr Dataset Evaluation.}{10}{subsection.4.4}\protected@file@percent }
-\abx@aux@page{37}{10}
+\abx@aux@page{38}{10}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset. Performance degrades compared to in-distribution data, with the finetuned variant showing better generalization.\relax }}{10}{table.caption.7}\protected@file@percent }
 \newlabel{tab:stage2_hf}{{3}{10}{Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset. Performance degrades compared to in-distribution data, with the finetuned variant showing better generalization.\relax }{table.caption.7}{}}
-\@writefile{toc}{\contentsline {paragraph}{GeoGuessr Game Evaluation.}{10}{table.caption.7}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }}{10}{table.caption.8}\protected@file@percent }
-\newlabel{tab:human_comparison}{{4}{10}{GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }{table.caption.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{GeoGuessr Game Evaluation.}{11}{table.caption.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }}{11}{table.caption.8}\protected@file@percent }
+\newlabel{tab:human_comparison}{{4}{11}{GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }{table.caption.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{11}{subsection.4.5}\protected@file@percent }
 \newlabel{sec:interpretability}{{4.5}{11}{Interpretability Analysis}{subsection.4.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{Gate Value Analysis.}{11}{subsection.4.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 90th percentile of learned gate values during validation over training epochs. Higher values indicate greater reliance on concept information versus spatial features. Both models converge to high gate values (0.83--0.86), with the vanilla variant showing slightly higher concept reliance than the finetuned variant.\relax }}{11}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:gate_distribution}{{5}{11}{90th percentile of learned gate values during validation over training epochs. Higher values indicate greater reliance on concept information versus spatial features. Both models converge to high gate values (0.83--0.86), with the vanilla variant showing slightly higher concept reliance than the finetuned variant.\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {paragraph}{Example Prediction Analysis.}{11}{figure.caption.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{11}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{11}{Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}\protected@file@percent }
-\newlabel{sec:conclusion}{{6}{12}{Conclusion}{section.6}{}}
-\abx@aux@page{38}{12}
-\abx@aux@page{39}{12}
-\abx@aux@page{40}{12}
-\abx@aux@page{41}{12}
-\abx@aux@page{42}{12}
-\abx@aux@page{43}{12}
-\abx@aux@page{44}{12}
-\abx@aux@page{45}{12}
-\abx@aux@page{46}{13}
-\abx@aux@page{47}{13}
-\abx@aux@page{48}{13}
-\abx@aux@page{49}{13}
-\abx@aux@page{50}{13}
-\abx@aux@page{51}{13}
-\abx@aux@page{52}{13}
-\abx@aux@page{53}{13}
-\abx@aux@page{54}{13}
-\abx@aux@page{55}{13}
-\abx@aux@page{56}{13}
-\abx@aux@page{57}{13}
-\abx@aux@page{58}{13}
-\abx@aux@page{59}{13}
-\abx@aux@page{60}{13}
-\abx@aux@page{61}{13}
-\abx@aux@page{62}{13}
-\abx@aux@page{63}{13}
-\abx@aux@page{64}{13}
-\abx@aux@page{65}{13}
-\abx@aux@page{66}{13}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Detailed Interpretability Examples}{13}{appendix.A}\protected@file@percent }
-\newlabel{app:interpretability}{{A}{13}{Detailed Interpretability Examples}{appendix.A}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Interpretability analysis for Game 1 Round 1. This example demonstrates the model attending to architectural and infrastructure features for geolocation. The patch attention heatmap reveals focus on road geometry and built structures, while concept predictions capture semantic categories relevant to the predicted region.\relax }}{14}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:interpretability_example_b}{{6}{14}{Interpretability analysis for Game 1 Round 1. This example demonstrates the model attending to architectural and infrastructure features for geolocation. The patch attention heatmap reveals focus on road geometry and built structures, while concept predictions capture semantic categories relevant to the predicted region.\relax }{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Interpretability analysis for Game 1 Round 9. The model identifies this location in West Africa through distinctive visual cues including unique vehicles and license plates, with balanced concept-spatial reasoning (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }}{15}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:interpretability_example_a}{{7}{15}{Interpretability analysis for Game 1 Round 9. The model identifies this location in West Africa through distinctive visual cues including unique vehicles and license plates, with balanced concept-spatial reasoning (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }{figure.caption.11}{}}
-\newlabel{LastPage}{{}{15}{}{page.15}{}}
-\xdef\lastpage@lastpage{15}
-\xdef\lastpage@lastpageHy{15}
-\abx@aux@read@bbl@mdfivesum{F6B984EA0DAE90DCF5FC76E6F465DD56}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.1}Concept vs. Image Contribution Analysis}{11}{subsubsection.4.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Swap/Shuffle ablation results measuring concept vs. image contribution. Shuffling concepts causes catastrophic degradation (291$\times $), while shuffling patches causes minimal impact (1.35$\times $), confirming that semantic concepts are the dominant signal for geolocation.\relax }}{12}{table.caption.9}\protected@file@percent }
+\newlabel{tab:swap_shuffle}{{5}{12}{Swap/Shuffle ablation results measuring concept vs. image contribution. Shuffling concepts causes catastrophic degradation (291$\times $), while shuffling patches causes minimal impact (1.35$\times $), confirming that semantic concepts are the dominant signal for geolocation.\relax }{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.2}Qualitative Interpretability}{12}{subsubsection.4.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.3}Gate Value Dynamics}{12}{subsubsection.4.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example interpretability visualization for a Norwegian residential scene. The model correctly identifies ``Norway'' as the top child concept and ``road\_sign'', ``script\_latin'', ``landscape\_arctic'' as parent concepts. The attention heatmap shows focus on road markings and architectural features. Gate value (0.483) indicates balanced concept-image fusion.\relax }}{13}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:interpretability_examples}{{5}{13}{Example interpretability visualization for a Norwegian residential scene. The model correctly identifies ``Norway'' as the top child concept and ``road\_sign'', ``script\_latin'', ``landscape\_arctic'' as parent concepts. The attention heatmap shows focus on road markings and architectural features. Gate value (0.483) indicates balanced concept-image fusion.\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces 90th percentile of learned gate values during validation over training epochs. Higher values indicate greater reliance on concept information versus spatial features. Both models converge to high gate values (0.83--0.86), with the vanilla variant showing slightly higher concept reliance than the finetuned variant.\relax }}{14}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:gate_distribution}{{6}{14}{90th percentile of learned gate values during validation over training epochs. Higher values indicate greater reliance on concept information versus spatial features. Both models converge to high gate values (0.83--0.86), with the vanilla variant showing slightly higher concept reliance than the finetuned variant.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Example Prediction Analysis.}{14}{figure.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{14}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{14}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{6}{15}{Conclusion}{section.6}{}}
+\abx@aux@page{39}{15}
+\abx@aux@page{40}{15}
+\abx@aux@page{41}{15}
+\abx@aux@page{42}{15}
+\abx@aux@page{43}{15}
+\abx@aux@page{44}{15}
+\abx@aux@page{45}{15}
+\abx@aux@page{46}{15}
+\abx@aux@page{47}{15}
+\abx@aux@page{48}{15}
+\abx@aux@page{49}{15}
+\abx@aux@page{50}{15}
+\abx@aux@page{51}{15}
+\abx@aux@page{52}{15}
+\abx@aux@page{53}{15}
+\abx@aux@page{54}{16}
+\abx@aux@page{55}{16}
+\abx@aux@page{56}{16}
+\abx@aux@page{57}{16}
+\abx@aux@page{58}{16}
+\abx@aux@page{59}{16}
+\abx@aux@page{60}{16}
+\abx@aux@page{61}{16}
+\abx@aux@page{62}{16}
+\abx@aux@page{63}{16}
+\abx@aux@page{64}{16}
+\abx@aux@page{65}{16}
+\abx@aux@page{66}{16}
+\abx@aux@page{67}{16}
+\abx@aux@page{68}{16}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Detailed Interpretability Examples}{16}{appendix.A}\protected@file@percent }
+\newlabel{app:interpretability}{{A}{16}{Detailed Interpretability Examples}{appendix.A}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Interpretability analysis for Game 1 Round 1. This example demonstrates the model attending to architectural and infrastructure features for geolocation. The patch attention heatmap reveals focus on road geometry and built structures, while concept predictions capture semantic categories relevant to the predicted region.\relax }}{17}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:interpretability_example_b}{{7}{17}{Interpretability analysis for Game 1 Round 1. This example demonstrates the model attending to architectural and infrastructure features for geolocation. The patch attention heatmap reveals focus on road geometry and built structures, while concept predictions capture semantic categories relevant to the predicted region.\relax }{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Interpretability analysis for Game 1 Round 9. The model identifies this location in West Africa through distinctive visual cues including unique vehicles and license plates, with balanced concept-spatial reasoning (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }}{18}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:interpretability_example_a}{{8}{18}{Interpretability analysis for Game 1 Round 9. The model identifies this location in West Africa through distinctive visual cues including unique vehicles and license plates, with balanced concept-spatial reasoning (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }{figure.caption.13}{}}
+\newlabel{LastPage}{{}{18}{}{page.18}{}}
+\xdef\lastpage@lastpage{18}
+\xdef\lastpage@lastpageHy{18}
+\abx@aux@read@bbl@mdfivesum{nohash}
+\abx@aux@read@bblrerun
 \abx@aux@defaultrefcontext{0}{arevalo2017gated}{nyt/global//global/global}
-\abx@aux@defaultrefcontext{0}{astruc2024omniloc}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{bengio2009curriculum}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{biljecki2021street}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{chauhan2023interactive}{nyt/global//global/global}
@@ -255,12 +265,13 @@
 \abx@aux@defaultrefcontext{0}{jia2025interpretable}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{koh2020concept}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{learnablemeta}{nyt/global//global/global}
-\abx@aux@defaultrefcontext{0}{li2020visual}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{li2024visual}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{lin2017focal}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{loshchilov2017adamw}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{muller2018geolocation}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{oord2018infonce}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{perez2018film}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{pramanick2022world}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{radford2021learning}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{seo2018cpl}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{srivastava2015highway}{nyt/global//global/global}
@@ -270,5 +281,6 @@
 \abx@aux@defaultrefcontext{0}{cepeda2023geoclip}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{wang2025street}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{weyand2016planet}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{yang2023language}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{yuksekgonul2022posthoc}{nyt/global//global/global}
-\gdef \@abspage@last{15}
+\gdef \@abspage@last{18}

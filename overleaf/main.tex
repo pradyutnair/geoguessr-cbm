@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{multirow}
+\usepackage{float}
 \usepackage{xcolor}
 \usepackage{titlesec}
 
@@ -70,7 +71,7 @@ Image geolocation, the task of predicting geographic coordinates from visual inp
 \section{Introduction}
 \label{sec:introduction}
 
-Visual geolocation has emerged as an important capability for applications ranging from autonomous navigation to content verification \parencite{hays2008im2gps}. The fundamental challenge lies in inferring geographic coordinates from images that may contain ambiguous visual patterns \parencite{li2020visual, astruc2024omniloc}. A rural road in South Africa may appear similar to one in Australia, while distinctive architectural styles or vegetation can provide strong localization cues.
+Visual geolocation has emerged as an important capability for applications ranging from autonomous navigation to content verification \parencite{hays2008im2gps}. The fundamental challenge lies in inferring geographic coordinates from images that may contain ambiguous visual patterns \parencite{li2024visual}. A rural road in South Africa may appear similar to one in Australia, while distinctive architectural styles or vegetation can provide strong localization cues.
 
 Early approaches treated geolocation as scene retrieval against geo-tagged databases \parencite{hays2008im2gps}. PlaNet \parencite{weyand2016planet} reformulated this as classification over geographic cells, and subsequent work improved accuracy through hierarchical structures \parencite{muller2018geolocation, seo2018cpl}, culminating in systems like PIGEON \parencite{haas2024pigeon} that achieve expert-level performance on GeoGuessr, an online game where players identify locations from street view imagery.
 
@@ -110,10 +111,24 @@ The concept bottleneck framework \parencite{koh2020concept} addresses neural net
 
 Our approach follows a curriculum learning strategy \parencite{bengio2009curriculum} that progressively builds a concept-aware geolocation system through three training stages. This staged approach allows each component to specialize before being integrated into the complete system, preventing optimization conflicts between different learning objectives.
 
-\begin{figure}[t!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{arch3.png}
-    \caption{Three-stage architecture for concept-aware geolocation. \textbf{Stage 0} (top) performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text{d} \to 768\text{d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf{Stage 1} (middle) learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf{Stage 2} (bottom) predicts geographic coordinates via learned gated fusion: concept embeddings query image patches through cross-attention to extract spatial context, then a learned gate balances concept versus spatial information for each dimension.}
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.85\textwidth]{stage0.png}
+        \caption{Stage 0: Domain Contrastive Pretraining}
+        \label{fig:stage0}
+    \end{subfigure}
+    
+    \vspace{0.5em}
+    
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{stage1_2.png}
+        \caption{Stage 1: Concept Learning and Stage 2: Geolocation}
+        \label{fig:stage1_2}
+    \end{subfigure}
+    \caption{Conceptual overview of the three-stage architecture for concept-aware geolocation. \textbf{(a) Stage 0} performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text{d} \to 768\text{d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf{(b) Stage 1} learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf{Stage 2} predicts geographic coordinates via learned gated fusion: concept embeddings and image embeddings are combined through cross-attention and a cell classification head with offset regression.}
     \label{fig:architecture}
 \end{figure}
 
@@ -122,7 +137,7 @@ Our approach follows a curriculum learning strategy \parencite{bengio2009curricu
 
 We train and evaluate our model on a dataset of 43,040 street view panorama images sourced from LearnableMeta \parencite{learnablemeta}, a website that curates challenging GeoGuessr ``metas.'' In the GeoGuessr community, a meta refers to a recurring visual pattern or clue that helps identify a specific country or region. Examples include distinctive road markings, unique vehicle types, characteristic vegetation, or country-specific infrastructure such as bollards, signage styles, or utility poles. Figure~\ref{fig:meta_examples} shows representative examples of such metas. Each sample contains a panoramic street view image, GPS coordinates (latitude and longitude), country name, the meta name, and a ``note'' column describing the meta. The meta name serves as the fine-grained child concept label, capturing scene types such as ``Urban Street'', ``Suburban Road'', and ``Rural Landscape''. The parent concept labels reflect broader categories like ``Urban'', ``Rural'', and ``Natural'', providing a hierarchical semantic structure.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \includegraphics[width=\textwidth]{example-image-a}
@@ -152,7 +167,7 @@ Traditional approaches partition the Earth's surface uniformly using fixed-resol
 
 For each country with sufficient samples, we convert GPS coordinates to 3D Cartesian positions on the unit sphere and apply K-means clustering with $k = \lceil n / s \rceil$ clusters, where $n$ is the sample count and $s = 500$ is the minimum samples per cell. Countries with fewer samples receive a single cell at their centroid. This process produces 1,048 geocells globally, with dense regions receiving finer granularity than sparse regions. Figure~\ref{fig:geocells} visualizes the resulting tessellation.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{geocells_map/geocells_map_finetuned_both.png}
@@ -351,7 +366,7 @@ The gated fusion in the ``both'' mode achieves the best performance (126.0 km) b
 
 Despite variation in fine-grained accuracy, country-level accuracy exceeds 80\% across all configurations, showing that the models maintain reliable coarse localization even when precise predictions are uncertain.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{analysis/stage2_test_split_results.png}
@@ -425,12 +440,72 @@ Human & 849.0 & 2643.0 & 2830 & 2665 \\
 \subsection{Interpretability Analysis}
 \label{sec:interpretability}
 
-Our concept-aware geolocation system provides multiple levels of interpretability through patch-level attention visualization, hierarchical concept predictions, and learned gating mechanisms.
+Our concept-aware geolocation system provides multiple levels of interpretability through patch-level attention visualization, hierarchical concept predictions, and learned gating mechanisms. We validate these interpretability claims through both quantitative ablation studies and qualitative visualization analysis.
 
-\paragraph{Gate Value Analysis.}
-Figure~\ref{fig:gate_distribution} shows the 90th percentile of gate values during validation across training epochs, comparing the vanilla and finetuned model variants. Both variants converge to high values (0.83--0.86), indicating that concept information dominates the upper dimensions of the embedding space. The vanilla model shows slightly higher gate values, suggesting that without Stage 0 pretraining, it relies more heavily on semantic concepts. The finetuned model, having learned better spatial representations through contrastive pretraining, leverages both information sources more effectively.
+\subsubsection{Concept vs. Image Contribution Analysis}
+
+To quantify the relative importance of semantic concepts versus visual features, we perform controlled ablation by shuffling inputs across the batch during inference. This tests whether predictions rely on proper alignment between concepts and image patches, or if either modality alone drives performance.
+
+Table~\ref{tab:swap_shuffle} shows the results of our swap/shuffle ablation study on the finetuned model with \texttt{both} ablation mode. Shuffling concept embeddings (while keeping patches aligned to their original images) increases median error from 28.6 km to 8340.5 km, a 291$\times$ degradation. In contrast, shuffling patch tokens (while keeping concepts aligned) increases error to only 38.6 km, a mere 1.35$\times$ degradation.
+
+\begin{table}[h!]
+    \centering
+    \caption{Swap/Shuffle ablation results measuring concept vs. image contribution. Shuffling concepts causes catastrophic degradation (291$\times$), while shuffling patches causes minimal impact (1.35$\times$), confirming that semantic concepts are the dominant signal for geolocation.}
+    \label{tab:swap_shuffle}
+    \begin{tabular}{lrr}
+        \toprule
+        \textbf{Condition} & \textbf{Median Error (km)} & \textbf{Degradation} \\
+        \midrule
+        Baseline & 28.6 & 1.00$\times$ \\
+        Concept Shuffled & 8340.5 & 291$\times$ \\
+        Patches Shuffled & 38.6 & 1.35$\times$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+This result confirms that semantic concepts learned through Stage 1 text-prototype classification are the primary signal for geolocation. The cross-attention over image patches provides complementary refinement (reducing error by approximately 10 km when properly aligned) but cannot substitute for concept understanding.
+
+\subsubsection{Qualitative Interpretability}
+
+Figure~\ref{fig:interpretability_examples} shows per-image interpretability outputs for three representative examples from different geographic regions. Each visualization includes:
+
+\begin{itemize}
+    \item \textbf{(A) Input Image}: The street view panorama being geolocated
+    \item \textbf{(B) Patch Attention Heatmap}: Which image regions the model attends to when making predictions
+    \item \textbf{(C) Geographic Prediction Map}: Predicted location with cell assignment
+    \item \textbf{(D) Gate Values}: Learned balance between concept and image contributions (mean $\approx$ 0.44, indicating balanced fusion)
+    \item \textbf{(F,G) Concept Predictions}: Top-5 child concepts and Top-3 parent concepts
+\end{itemize}
+
+The visualizations demonstrate that:
+\begin{enumerate}
+    \item The model correctly identifies scene-level attributes that correlate with geographic regions (e.g., ``script\_cyrillic'' for Russian locations, ``road\_sign'' and ``landscape\_arctic'' for Scandinavian scenes)
+    \item Attention is distributed across semantically relevant image regions (road surfaces, signs, vegetation, architecture)
+    \item The learned gate maintains balanced reliance on both modalities (mean $\approx$ 0.44), with high variance (std $\approx$ 0.27) indicating dynamic adjustment based on image content
+    \item Parent concept predictions (e.g., ``car\_meta'', ``camera\_meta'', ``road\_sign'') provide coarse semantic grounding while child concepts offer fine-grained discrimination
+\end{enumerate}
 
 \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\textwidth]{report/interpretability/example_norway_residential.png}
+    \caption{Example interpretability visualization for a Norwegian residential scene. The model correctly identifies ``Norway'' as the top child concept and ``road\_sign'', ``script\_latin'', ``landscape\_arctic'' as parent concepts. The attention heatmap shows focus on road markings and architectural features. Gate value (0.483) indicates balanced concept-image fusion.}
+    \label{fig:interpretability_examples}
+\end{figure}
+
+\subsubsection{Gate Value Dynamics}
+
+The learned gating mechanism dynamically balances concept and image contributions. Across the validation set, gate values show:
+\begin{itemize}
+    \item Mean: 0.44 (slightly image-biased but near balanced)
+    \item Standard deviation: 0.27 (high variance indicating adaptive behavior)
+    \item Range: [0.01, 0.99] (full dynamic range utilized)
+\end{itemize}
+
+This confirms that the model learns to leverage both information sources rather than collapsing to use only one modality. The high variance indicates that the gate adapts based on image content, using more concept information when visual features are ambiguous and more image information when distinctive visual patterns are present.
+
+Figure~\ref{fig:gate_distribution} shows the 90th percentile of gate values during validation across training epochs, comparing the vanilla and finetuned model variants. Both variants converge to high values (0.83--0.86), indicating that concept information dominates the upper dimensions of the embedding space. The vanilla model shows slightly higher gate values, suggesting that without Stage 0 pretraining, it relies more heavily on semantic concepts. The finetuned model, having learned better spatial representations through contrastive pretraining, leverages both information sources more effectively.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{val_gate.png}
     \caption{90th percentile of learned gate values during validation over training epochs. Higher values indicate greater reliance on concept information versus spatial features. Both models converge to high gate values (0.83--0.86), with the vanilla variant showing slightly higher concept reliance than the finetuned variant.}
@@ -488,14 +563,14 @@ Future directions include expanding the dataset for better concept representatio
 
 Figures~\ref{fig:interpretability_example_a} and~\ref{fig:interpretability_example_b} present comprehensive interpretability analyses for two representative GeoGuessr rounds, demonstrating all aspects of the model's reasoning process.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{round_01_110135_concepts.png}
     \caption{Interpretability analysis for Game 1 Round 1. This example demonstrates the model attending to architectural and infrastructure features for geolocation. The patch attention heatmap reveals focus on road geometry and built structures, while concept predictions capture semantic categories relevant to the predicted region.}
     \label{fig:interpretability_example_b}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{round_09_110825_concepts.png}
     \caption{Interpretability analysis for Game 1 Round 9. The model identifies this location in West Africa through distinctive visual cues including unique vehicles and license plates, with balanced concept-spatial reasoning (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.}
