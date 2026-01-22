@@ -22,9 +22,9 @@
 \usepackage[style=authoryear-comp]{biblatex}
 \addbibresource{references.bib}
 
-% Format for paragraph-level headings (used as subsubsubsection)
-\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}{0pt}{1.5ex plus 0.5ex minus 0.2ex}{0.5ex plus 0.1ex}
+% Format for paragraph-level headings (run-in style like NeurIPS)
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{0em}{}
+\titlespacing*{\paragraph}{0pt}{1.0ex plus 0.5ex minus 0.2ex}{1em}
 
 %-------------------------------------------------------------------------------
 %	DOCUMENT METADATA
@@ -92,11 +92,14 @@ This work develops a concept-aware geolocation system that predicts locations th
 \section{Related Work}
 \label{sec:related}
 
-Visual geolocation research has evolved from retrieval-based methods \parencite{hays2008im2gps} to classification over geographic partitions. PlaNet \parencite{weyand2016planet} demonstrated that training CNNs to classify images into approximately 26,000 S2 cells \parencite{s2geometry} could achieve reasonable global geolocation. Hierarchical approaches \parencite{muller2018geolocation} improved performance by predicting at multiple spatial scales, while CPlaNet \parencite{seo2018cpl} introduced combinatorial partitioning for finer-grained predictions. Recent work leverages large-scale pretraining: StreetCLIP \parencite{streetclip2023} fine-tunes CLIP on street view imagery, and GeoCLIP \parencite{cepeda2023geoclip} learns joint embeddings of images and GPS coordinates through contrastive learning.
+\paragraph{Visual Geolocation.}
+Visual geolocation research has evolved from retrieval-based methods \parencite{hays2008im2gps} to classification over geographic partitions. PlaNet \parencite{weyand2016planet} demonstrated that training CNNs to classify images into approximately 26,000 S2 cells \parencite{s2geometry} could achieve reasonable global geolocation. Hierarchical approaches \parencite{muller2018geolocation} improved performance by predicting at multiple spatial scales, while CPlaNet \parencite{seo2018cpl} introduced combinatorial partitioning for finer-grained predictions. More recently, TransLocator \parencite{pramanick2022world} applied transformers to geolocation through scene classification and geographic cell prediction. ISNs \parencite{muller2018geolocation} pioneered the use of individual scene networks that specialize in different geographic regions, enabling more fine-grained predictions. PIGEON \parencite{haas2024pigeon} achieved expert-level performance on GeoGuessr by combining CLIP-based features with sophisticated geocell prediction, demonstrating that vision-language models provide strong foundations for geolocation tasks.
 
-The concept bottleneck framework \parencite{koh2020concept} addresses neural network interpretability by inserting a layer of human-understandable concepts between input features and final predictions. This design ensures that all model decisions can be traced to specific concept activations, enabling both interpretation and intervention. Extensions have explored concept learning from language supervision, post-hoc transformation of pre-trained networks \parencite{yuksekgonul2022posthoc}, stochastic concept dependencies \parencite{vandenhirtz2024stochastic}, and interactive human-in-the-loop systems \parencite{chauhan2023interactive}. Most closely related to our work, \cite{jia2025interpretable}, propose a concept-aware framework for interpretable geolocalization that aligns images and GPS coordinates through semantic concepts, demonstrating the value of concept-based reasoning for geographic prediction tasks.
+\paragraph{Vision-Language Models for Geolocation.}
+CLIP \parencite{radford2021learning} learns aligned vision-language representations through contrastive learning on 400 million image-text pairs, enabling zero-shot transfer to novel visual concepts through natural language descriptions. StreetCLIP \parencite{streetclip2023} fine-tunes CLIP specifically on street view imagery, improving performance on geographically-relevant visual recognition tasks. GeoCLIP \parencite{cepeda2023geoclip} extends this paradigm by training a location encoder alongside CLIP's image encoder, learning joint embeddings where visually similar locations cluster together regardless of their geographic distance. Cross-view approaches \parencite{toker2021satellite_cvpr} have explored matching street-level imagery with overhead satellite views for localization, leveraging the complementary information available from different viewpoints.
 
-CLIP \parencite{radford2021learning} learns aligned vision-language representations through contrastive learning on 400 million image-text pairs. This foundation enables zero-shot transfer to novel visual concepts through natural language descriptions. GeoCLIP \parencite{cepeda2023geoclip} extends this paradigm to geographic understanding by training a location encoder alongside CLIP's image encoder, learning joint embeddings where visually similar locations cluster together. Cross-view approaches \parencite{toker2021satellite_cvpr} have explored matching street-level imagery with overhead satellite views for localization. Our work builds on these foundations by introducing an explicit concept bottleneck that mediates between visual features and geographic predictions.
+\paragraph{Concept Bottleneck Models.}
+The concept bottleneck framework \parencite{koh2020concept} addresses neural network interpretability by inserting a layer of human-understandable concepts between input features and final predictions. This design ensures that all model decisions can be traced to specific concept activations, enabling both interpretation and intervention. Early work required manually annotated concept labels, but subsequent extensions have explored concept learning from language supervision \parencite{yang2023language}, post-hoc transformation of pre-trained networks \parencite{yuksekgonul2022posthoc}, and stochastic concept dependencies \parencite{vandenhirtz2024stochastic}. Interactive systems \parencite{chauhan2023interactive} enable human correction of concept predictions to improve downstream accuracy. Most closely related to our work, \cite{jia2025interpretable} propose a concept-aware framework for interpretable geolocalization that aligns images and GPS coordinates through semantic concepts, demonstrating the value of concept-based reasoning for geographic prediction tasks. Our approach differs by introducing hierarchical concepts (child and parent levels), text-anchored prototypes initialized from vision-language embeddings, and a learned gating mechanism that balances concept versus spatial information.
 
 %-------------------------------------------------------------------------------
 %	METHODOLOGY
@@ -107,17 +110,37 @@ CLIP \parencite{radford2021learning} learns aligned vision-language representati
 
 Our approach follows a curriculum learning strategy \parencite{bengio2009curriculum} that progressively builds a concept-aware geolocation system through three training stages. This staged approach allows each component to specialize before being integrated into the complete system, preventing optimization conflicts between different learning objectives.
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
-    \includegraphics[width=\textwidth]{arch3.png}
-    \caption{Three-stage architecture for concept-aware geolocation. Stage 0 performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter (512d$\to$768d) to align GeoCLIP location features with StreetCLIP image features. Stage 1 learns hierarchical concept classification through text-anchored prototypes with cosine similarity. Stage 2 predicts geographic coordinates via learned gated fusion: concept embeddings query image patches through cross-attention to extract spatial context, then a learned gate balances concept versus spatial information for each dimension.}
+    \includegraphics[width=1.1\textwidth]{arch3.png}
+    \caption{Three-stage architecture for concept-aware geolocation. \textbf{Stage 0} (top) performs domain contrastive pretraining to align image, GPS, and concept embeddings, with a GPS adapter ($512\text{d} \to 768\text{d}$) projecting GeoCLIP location features to match StreetCLIP image features. \textbf{Stage 1} (middle) learns hierarchical concept classification through text-anchored prototypes with cosine similarity. \textbf{Stage 2} (bottom) predicts geographic coordinates via learned gated fusion: concept embeddings query image patches through cross-attention to extract spatial context, then a learned gate balances concept versus spatial information for each dimension.}
     \label{fig:architecture}
 \end{figure}
 
 \subsection{Dataset and Preprocessing}
 
 
-We train and evaluate our model on a dataset of 43,040 street view panorama images sourced from LearnableMeta \parencite{learnablemeta}, a website that curates challenging GeoGuessr metas. These metas represent distinctive or difficult locations that test geolocation capabilities. Each sample contains a panoramic street view image, GPS coordinates (latitude and longitude), country name, the meta name, and a ``note'' column describing the meta. The meta name is used as the fine-grained child concept label, which captures scene types such as ``Urban Street'', ``Suburban Road'', and ``Rural Landscape''. The parent concept labels reflect broader categories like ``Urban'', ``Rural'', and ``Natural'', providing a hierarchical semantic structure.
+We train and evaluate our model on a dataset of 43,040 street view panorama images sourced from LearnableMeta \parencite{learnablemeta}, a website that curates challenging GeoGuessr ``metas.'' In the GeoGuessr community, a meta refers to a recurring visual pattern or clue that helps identify a specific country or region. Examples include distinctive road markings, unique vehicle types, characteristic vegetation, or country-specific infrastructure such as bollards, signage styles, or utility poles. Figure~\ref{fig:meta_examples} shows representative examples of such metas. Each sample contains a panoramic street view image, GPS coordinates (latitude and longitude), country name, the meta name, and a ``note'' column describing the meta. The meta name serves as the fine-grained child concept label, capturing scene types such as ``Urban Street'', ``Suburban Road'', and ``Rural Landscape''. The parent concept labels reflect broader categories like ``Urban'', ``Rural'', and ``Natural'', providing a hierarchical semantic structure.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{example-image-a}
+        \caption{Placeholder: Meta Example 1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{example-image-b}
+        \caption{Placeholder: Meta Example 2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{example-image-c}
+        \caption{Placeholder: Meta Example 3}
+    \end{subfigure}
+    \caption{Examples of GeoGuessr metas: distinctive visual patterns that help identify geographic locations. These may include unique road markings, vehicle types, vegetation patterns, or infrastructure elements specific to certain countries or regions.}
+    \label{fig:meta_examples}
+\end{figure}
 
 The dataset exhibits a hierarchical concept structure with 2,126 child concepts organized under 257 parent concepts. This hierarchy captures semantic relationships: for instance, child concepts ``Urban Street'', ``Commercial District'', and ``Residential Area'' all map to the parent concept ``Urban''. We leverage this hierarchy through consistency losses that encourage predictions at both levels to align.
 
@@ -125,7 +148,7 @@ Data is split into training (70\%), validation (15\%), and test (15\%) sets usin
 
 \subsection{Geocell Generation}
 
-Traditional approaches partition the Earth's surface uniformly using fixed-resolution grids like S2 cells \parencite{s2geometry}, but this fails to account for non-uniform data distribution. Urban areas contain far more street view imagery than remote regions \parencite{biljecki2021street, wang2025street}. We address this through adaptive per-country clustering that allocates geocells according to regional data density.
+Traditional approaches partition the Earth's surface uniformly using fixed-resolution grids like S2 cells \parencite{s2geometry}, but this fails to account for non-uniform data distribution. Urban areas contain far more street view imagery than remote regions \parencite{biljecki2021street, wang2025street}. We address this through adaptive per-country clustering that allocates geocells according to regional data density, using only the training split to generate cell centers to prevent data leakage.
 
 For each country with sufficient samples, we convert GPS coordinates to 3D Cartesian positions on the unit sphere and apply K-means clustering with $k = \lceil n / s \rceil$ clusters, where $n$ is the sample count and $s = 500$ is the minimum samples per cell. Countries with fewer samples receive a single cell at their centroid. This process produces 1,048 geocells globally, with dense regions receiving finer granularity than sparse regions. Figure~\ref{fig:geocells} visualizes the resulting tessellation.
 
@@ -150,29 +173,29 @@ For each country with sufficient samples, we convert GPS coordinates to 3D Carte
 
 The first training stage adapts the StreetCLIP vision encoder to our specific domain through multi-objective contrastive learning. While StreetCLIP provides strong geographic priors from pretraining on street view imagery, partial fine-tuning improves downstream concept learning and geolocation accuracy. We unfreeze the top two transformer layers while keeping lower layers frozen to preserve general visual representations.
 
-\subsubsection{GPS Adapter}
+\paragraph{GPS Adapter.}
 The GeoCLIP location encoder produces 512-dimensional GPS embeddings, which we project to 768 dimensions to match the StreetCLIP image feature space for contrastive learning.
 
-\subsubsection{Concept Bottleneck Projection}
+\paragraph{Concept Bottleneck Projection.}
 A concept bottleneck projects image features to a 512-dimensional embedding space for concept learning:
 \begin{equation}
 z = \text{ConceptBottleneck}(x) = \text{LayerNorm}(\text{MLP}(\text{LayerNorm}(\text{MLP}(x))))
 \end{equation}
 where $x \in \mathbb{R}^{768}$ is the image feature and $z \in \mathbb{R}^{512}$ is the concept embedding.
 
-\subsubsection{Prototype Projection}
+\paragraph{Prototype Projection.}
 Text prototypes encoded by the frozen StreetCLIP text encoder (768-dimensional) are projected to the concept embedding space:
 \begin{equation}
 T_{\text{projected}} = \text{normalize}(W_T \cdot T_{\text{text}})
 \end{equation}
 where $W_T \in \mathbb{R}^{512 \times 768}$ is a learnable projection matrix.
 
-\subsubsection{Alignment Objectives}
+\paragraph{Alignment Objectives.}
 The core alignment objective uses InfoNCE loss \parencite{oord2018infonce} to bring image embeddings closer to their corresponding GPS embeddings while pushing apart embeddings from different locations:
 \begin{equation}
-\mathcal{L}_{\text{GPS}} = -\frac{1}{B}\sum_{i=1}^{B}\log\frac{\exp(\text{sim}(x_i, g_{\text{768},i})/\tau)}{\sum_{j=1}^{B}\exp(\text{sim}(x_i, g_{\text{768},j})/\tau)}
+\mathcal{L}_{\text{GPS}} = -\frac{1}{B}\sum_{i=1}^{B}\log\frac{\exp(\text{sim}(x_i, g_i)/\tau)}{\sum_{j=1}^{B}\exp(\text{sim}(x_i, g_j)/\tau)}
 \end{equation}
-where $x_i$ is the L2-normalized image embedding, $g_{\text{768},i}$ is the GPS embedding projected to 768 dimensions, and $\tau = 0.07$ is the temperature parameter.
+where $x_i$ is the L2-normalized image embedding, $g_i$ is the GPS embedding projected to 768 dimensions via the GPS adapter, and $\tau = 0.07$ is the temperature parameter.
 
 Concept alignment losses similarly encourage concept embeddings to cluster according to their semantic labels:
 \begin{align}
@@ -181,7 +204,7 @@ Concept alignment losses similarly encourage concept embeddings to cluster accor
 \end{align}
 where $z$ is the L2-normalized concept embedding, $T_{\text{child}}$ and $T_{\text{parent}}$ are text-encoded prototype matrices projected to 512 dimensions, and $c_{\text{child}}$, $c_{\text{parent}}$ are the ground truth concept indices.
 
-An optional hierarchy consistency loss encourages embeddings from the same parent category to cluster together in the concept space, enforcing the semantic relationship between child and parent concepts. An optional anchor loss prevents catastrophic forgetting by penalizing large deviations from the original StreetCLIP representations. Additionally, an optional patch-level GPS alignment loss encourages patch tokens to align with GPS embeddings, providing spatial regularization.
+Several optional losses provide additional regularization. The hierarchy consistency loss $\mathcal{L}_{\text{hierarchy}}$ uses supervised contrastive learning to encourage embeddings from the same parent category to cluster together in concept space, enforcing semantic relationships between child and parent concepts. The anchor loss $\mathcal{L}_{\text{anchor}} = \text{MSE}(f_\theta(x), f_{\text{vanilla}}(x))$ prevents catastrophic forgetting by penalizing large deviations from frozen vanilla StreetCLIP features $f_{\text{vanilla}}$. The patch-level GPS alignment loss $\mathcal{L}_{\text{patch-GPS}}$ applies contrastive learning between pooled patch embeddings and GPS embeddings, providing spatial regularization at the patch level.
 
 In practice, we find that the core GPS, child concept, and parent concept alignment objectives are sufficient for effective domain adaptation. The hierarchy consistency and patch-GPS losses are optional and were not used in training the final model reported in our experiments ($\lambda_{\text{hierarchy}} = 0$, $\lambda_{\text{patch}} = 0$). The total Stage 0 loss combines these objectives with learned weights and is given by the following equation:
 \begin{equation}
@@ -194,14 +217,14 @@ Stage 0 trains for 20 epochs with batch size 128, using differential learning ra
 
 The second stage learns concept representations through text-anchored classification with hierarchical supervision. The image encoder is frozen to preserve domain alignment from Stage 0, focusing learning on the concept bottleneck.
 
-\subsubsection{Text-Anchored Prototypes}
-Rather than learning concept prototypes from scratch, we initialize them from frozen StreetCLIP text embeddings of concept descriptions. This provides strong semantic grounding: the prototype for ``Urban Street'' begins close to StreetCLIP's representation of that phrase. Learnable residual vectors then allow adaptation to visual patterns specific to our domain:
+\paragraph{Text-Anchored Prototypes.}
+A key design choice in Stage 1 is how to represent concept prototypes. Rather than learning prototypes from scratch (which risks losing semantic meaning), we initialize them from frozen StreetCLIP text embeddings of concept descriptions. This provides strong semantic grounding: the prototype for ``Urban Street'' begins close to StreetCLIP's representation of that phrase. Learnable residual vectors then allow adaptation to visual patterns specific to our domain while preserving the original semantic structure:
 \begin{equation}
 T = \text{normalize}(W_T \cdot (T^{\text{base}} + \Delta))
 \end{equation}
 where $T^{\text{base}} \in \mathbb{R}^{k \times 768}$ contains frozen text embeddings, $\Delta \in \mathbb{R}^{k \times 768}$ is a learnable residual initialized from $\mathcal{N}(0, 0.01)$, and $W_T \in \mathbb{R}^{512 \times 768}$ maps to our 512-dimensional concept embedding space. The final prototypes are L2-normalized.
 
-\subsubsection{Cosine Similarity Classification}
+\paragraph{Cosine Similarity Classification.}
 Concept predictions are computed through cosine similarity to prototypes, with learnable temperature scales and per-class bias terms:
 \begin{align}
 \text{logits}_{\text{child}} &= s_{\text{child}} \cdot (\hat{z} \cdot T_{\text{child}}^T) + b_{\text{child}} \\
@@ -209,10 +232,10 @@ Concept predictions are computed through cosine similarity to prototypes, with l
 \end{align}
 where $\hat{z} = \text{normalize}(z)$ is the L2-normalized concept embedding, $s_{\text{child}}$ and $s_{\text{parent}}$ are learnable logit scales (initialized to 14.0, clamped to 20), and $b_{\text{child}}, b_{\text{parent}} \in \mathbb{R}^k$ are per-class bias terms.
 
-\subsubsection{Concept Bottleneck Options}
+\paragraph{Concept Bottleneck Options.}
 The concept bottleneck projecting image features ($x \in \mathbb{R}^{768}$) to concept embeddings ($z \in \mathbb{R}^{512}$) can be implemented as either: (1) an MLP with LayerNorm and dropout (0.4), or (2) a TransformerBottleneck with self-attention and attention pooling. The TransformerBottleneck uses a learnable [CLS] token, positional encoding, and stochastic depth (0.2) for regularization.
 
-\subsubsection{Training Objectives}
+\paragraph{Training Objectives.}
 Stage 1 employs focal loss \parencite{lin2017focal} for classification to address class imbalance, with label smoothing of 0.2:
 \begin{equation}
 \mathcal{L}_{\text{focal}} = -\alpha(1-p_t)^\gamma \log(p_t)
@@ -230,7 +253,7 @@ The final stage predicts geographic coordinates through learned fusion of concep
 
 The Stage 2 model receives frozen concept embeddings $z \in \mathbb{R}^{512}$ from Stage 1 and frozen patch tokens $P \in \mathbb{R}^{576 \times 1024}$ from the image encoder. The architecture supports three ablation modes: (1) \textit{Both}: learned gated fusion (default); (2) \textit{Concept-only}: predictions from concept embedding alone; (3) \textit{Image-only}: predictions from pooled patch tokens alone.
 
-\subsubsection{Cross-Attention for Spatial Context}
+\paragraph{Cross-Attention for Spatial Context.}
 In the default mode, multi-head cross-attention \parencite{vaswani2017attention} uses the concept embedding as query and patch tokens as keys/values:
 \begin{align}
 Q &= z \in \mathbb{R}^{512} \quad (\text{concept embedding as query}) \\
@@ -239,7 +262,7 @@ K &= V = W_P \cdot P \in \mathbb{R}^{576 \times 512} \quad (\text{projected patc
 \end{align}
 where $W_P \in \mathbb{R}^{512 \times 1024}$ projects patch tokens to the concept embedding dimension. The attention weights can be reshaped to a $24 \times 24$ spatial map for interpretable visualization.
 
-\subsubsection{Learned Gating Mechanism}
+\paragraph{Learned Gating Mechanism.}
 The key innovation is combining the concept embedding with cross-attention output through a learned gate \parencite{srivastava2015highway, arevalo2017gated}:
 \begin{align}
 z_{\text{spatial}} &= \text{FFN}(\text{LayerNorm}(z + \text{attn})) \in \mathbb{R}^{512} \\
@@ -250,7 +273,7 @@ z_{\text{final}} &= \text{FusionMLP}(\text{concat}(z, z_{\text{gated}}))
 \end{align}
 where $\sigma$ is the sigmoid function, $\odot$ is element-wise multiplication, and $g$ is a 512-dimensional gate vector. Following feature-wise gating \parencite{perez2018film}, each dimension independently balances concept versus spatial information: $g_d \approx 1$ indicates reliance on concepts, $g_d \approx 0$ on spatial features, and $g_d \approx 0.5$ balanced contribution. A detailed analysis of gate distributions is presented in Section~\ref{sec:interpretability}.
 
-\subsubsection{Prediction Heads}
+\paragraph{Prediction Heads.}
 Two prediction heads operate on the final fused embedding $z_{\text{final}}$: a cell head performing softmax classification over 1,048 geocells, and an offset head performing MSE regression predicting 3D Cartesian offset from the cell center.
 
 The total Stage 2 loss combines cell classification cross-entropy and offset regression MSE:
@@ -296,7 +319,7 @@ Both variants achieve comparable child concept accuracy around 46\%, reflecting 
 
 \subsection{Stage 2: Geolocation Results}
 
-Table~\ref{tab:stage2_test} presents geolocation results on the test split, comparing ablation modes and model variants.
+Table~\ref{tab:stage2_test} presents geolocation results on the test split, comparing ablation modes and model variants. Figure~\ref{fig:stage2_visual_results} provides a visual summary of these results, showing the performance differences across ablation modes and model variants.
 
 \begin{table}[h!]
 \centering
@@ -306,12 +329,12 @@ Table~\ref{tab:stage2_test} presents geolocation results on the test split, comp
 \textbf{Variant} & \textbf{Mode} & \textbf{Median (km)} & \textbf{Mean (km)} & \textbf{Cell Acc} & \textbf{City} & \textbf{Region} & \textbf{Country} \\
 \midrule
 \multirow{3}{*}{Vanilla} 
-& Both & 133.2 & 713.8 & 0.454 & 0.215 & 0.574 & \textbf{0.830} \\
+& Both & 133.2 & 713.8 & \textbf{0.454} & 0.215 & 0.574 & \textbf{0.830} \\
 & Concept & 139.0 & 745.9 & 0.451 & 0.195 & 0.566 & 0.824 \\
 & Image & 222.0 & 1070.5 & 0.374 & 0.175 & 0.482 & 0.753 \\
 \midrule
 \multirow{3}{*}{Finetuned} 
-& Both & \textbf{126.0} & \textbf{684.6} & \textbf{0.449} & \textbf{0.232} & \textbf{0.578} & 0.829 \\
+& Both & \textbf{126.0} & \textbf{684.6} & 0.449 & \textbf{0.232} & \textbf{0.578} & 0.829 \\
 & Concept & 137.0 & 688.6 & 0.443 & 0.227 & 0.564 & 0.822 \\
 & Image & 154.0 & 790.5 & 0.430 & 0.202 & 0.546 & 0.806 \\
 \bottomrule
@@ -328,13 +351,28 @@ The gated fusion in the ``both'' mode achieves the best performance (126.0 km) b
 
 Despite variation in fine-grained accuracy, country-level accuracy exceeds 80\% across all configurations, showing that the models maintain reliable coarse localization even when precise predictions are uncertain.
 
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{analysis/stage2_test_split_results.png}
+        \caption{Test split results across ablation modes and variants.}
+        \label{fig:stage2_test_visual}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{analysis/stage2_hf_results.png}
+        \caption{External HuggingFace dataset results with GeoCLIP baseline.}
+        \label{fig:stage2_hf_visual}
+    \end{subfigure}
+    \caption{Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.}
+    \label{fig:stage2_visual_results}
+\end{figure}
 
 \subsection{Out-of-Distribution Evaluation}
 
 To assess generalization beyond our compiled dataset, we evaluate our approach on two complementary external datasets: (1) a static GeoGuessr image benchmark from HuggingFace, and (2) live GeoGuessr game rounds through an automated bot system. This two-pronged evaluation strategy tests both batch inference performance and real-time interactive capabilities.
 
-\subsubsection{External GeoGuessr Dataset Evaluation}
-
+\paragraph{External GeoGuessr Dataset Evaluation.}
 We evaluate on a publicly available GeoGuessr dataset \parencite{fren-gor-geoguessr} containing 5,478 street view images with associated ground truth locations. Table~\ref{tab:stage2_hf} presents results on this static benchmark.
 
 \begin{table}[h!]
@@ -365,8 +403,7 @@ Out-of-distribution performance on the static benchmark reveals the generalizati
 
 Comparing variants within each ablation mode confirms the consistent benefit of Stage 0 pretraining. The finetuned model achieves lower median error than vanilla for all three modes, with improvements ranging from approximately 9 to 14\% depending on the configuration. Even with the distribution shift, country-level accuracy remains above 63\% across all configurations. The baseline GeoCLIP model achieves significantly higher median error (1015.8 km), demonstrating the advantage of our concept-aware approach.
 
-\subsubsection{GeoGuessr Game Evaluation}
-
+\paragraph{GeoGuessr Game Evaluation.}
 To assess real-time interactive performance, we deployed our model through a FastAPI-based inference server and integrated it directly with GeoGuessr's game API. This automated bot system captures panoramic imagery from active game rounds, submits predictions through GeoGuessr's endpoints, and records scores and distances exactly as human players experience them. We evaluated on 5 games totaling 25 rounds spanning diverse global locations.
 
 Table~\ref{tab:human_comparison} presents aggregated results comparing our model against human performance on the same game rounds. Our model achieves superior median distance error (549.8 km vs 849.0 km) and higher GeoGuessr scores (3459 vs 2830 median), demonstrating that the concept bottleneck does not substantially compromise practical performance in live game settings. The human player shows high variance (849 km median but 2643 km mean), suggesting that human geolocation relies on domain knowledge and reasoning that remains challenging to fully capture algorithmically.
@@ -390,7 +427,7 @@ Human & 849.0 & 2643.0 & 2830 & 2665 \\
 
 Our concept-aware geolocation system provides multiple levels of interpretability through patch-level attention visualization, hierarchical concept predictions, and learned gating mechanisms.
 
-\subsubsection{Gate Value Analysis}
+\paragraph{Gate Value Analysis.}
 Figure~\ref{fig:gate_distribution} shows the 90th percentile of gate values during validation across training epochs, comparing the vanilla and finetuned model variants. Both variants converge to high values (0.83--0.86), indicating that concept information dominates the upper dimensions of the embedding space. The vanilla model shows slightly higher gate values, suggesting that without Stage 0 pretraining, it relies more heavily on semantic concepts. The finetuned model, having learned better spatial representations through contrastive pretraining, leverages both information sources more effectively.
 
 \begin{figure}[h!]
@@ -400,7 +437,7 @@ Figure~\ref{fig:gate_distribution} shows the 90th percentile of gate values duri
     \label{fig:gate_distribution}
 \end{figure}
 
-\subsubsection{Example Prediction Analysis}
+\paragraph{Example Prediction Analysis.}
 Figures~\ref{fig:interpretability_example_a} and~\ref{fig:interpretability_example_b} in the Appendix present comprehensive analyses of representative GeoGuessr rounds, illustrating patch-level attention visualization, geographic prediction with confidence metrics, concept-based reasoning, and the learned gating mechanism. The analyses reveal that the model focuses on distinctive visual features such as vehicles, road markings, and architectural structures, with hierarchical concept predictions capturing both specific indicators and broader geographic context.
 
 %-------------------------------------------------------------------------------
