@@ -5,34 +5,33 @@
 \contentsline {paragraph}{Vision-Language Models for Geolocation.}{3}{section.2}%
 \contentsline {paragraph}{Concept Bottleneck Models.}{3}{section.2}%
 \contentsline {section}{\numberline {3}Methodology}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Dataset and Preprocessing}{3}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Geocell Generation}{5}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Stage 0: Domain Contrastive Pretraining}{6}{subsection.3.3}%
 \contentsline {paragraph}{GPS Adapter.}{6}{subsection.3.3}%
 \contentsline {paragraph}{Concept Bottleneck Projection.}{6}{subsection.3.3}%
 \contentsline {paragraph}{Prototype Projection.}{6}{equation.3.1}%
 \contentsline {paragraph}{Alignment Objectives.}{6}{equation.3.2}%
-\contentsline {subsection}{\numberline {3.4}Stage 1: Text-Prototype Concept Learning}{7}{subsection.3.4}%
-\contentsline {paragraph}{Text-Anchored Prototypes.}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Stage 1: Text-Prototype Concept Learning}{6}{subsection.3.4}%
+\contentsline {paragraph}{Text-Anchored Prototypes.}{6}{subsection.3.4}%
 \contentsline {paragraph}{Cosine Similarity Classification.}{7}{equation.3.7}%
 \contentsline {paragraph}{Concept Bottleneck Options.}{7}{equation.3.9}%
 \contentsline {paragraph}{Training Objectives.}{7}{equation.3.9}%
-\contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{8}{subsection.3.5}%
-\contentsline {paragraph}{Cross-Attention for Spatial Context.}{8}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{7}{subsection.3.5}%
+\contentsline {paragraph}{Cross-Attention for Spatial Context.}{7}{subsection.3.5}%
 \contentsline {paragraph}{Learned Gating Mechanism.}{8}{equation.3.14}%
 \contentsline {paragraph}{Prediction Heads.}{8}{equation.3.19}%
 \contentsline {section}{\numberline {4}Experiments}{8}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{8}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{9}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{10}{subsection.4.4}%
 \contentsline {paragraph}{External GeoGuessr Dataset Evaluation.}{10}{subsection.4.4}%
 \contentsline {paragraph}{GeoGuessr Game Evaluation.}{11}{table.caption.7}%
 \contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{11}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Concept vs. Image Contribution Analysis}{11}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}Qualitative Interpretability}{12}{subsubsection.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.3}Gate Value Dynamics}{12}{subsubsection.4.5.3}%
-\contentsline {paragraph}{Example Prediction Analysis.}{14}{figure.caption.11}%
-\contentsline {section}{\numberline {5}Discussion}{14}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}%
-\contentsline {section}{\numberline {A}Detailed Interpretability Examples}{16}{appendix.A}%
+\contentsline {paragraph}{Concept vs. Image Contribution.}{11}{subsection.4.5}%
+\contentsline {paragraph}{Qualitative Interpretability.}{12}{table.caption.9}%
+\contentsline {paragraph}{Gate Value Dynamics.}{12}{table.caption.9}%
+\contentsline {section}{\numberline {5}Discussion}{12}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}%
+\contentsline {section}{\numberline {A}Interpretability Examples}{15}{appendix.A}%
