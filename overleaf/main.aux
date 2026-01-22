@@ -64,6 +64,10 @@
 \@writefile{toc}{\contentsline {paragraph}{Visual Geolocation.}{2}{section.2}\protected@file@percent }
 \abx@aux@page{8}{2}
 \abx@aux@page{9}{2}
+\abx@aux@page{10}{2}
+\abx@aux@page{11}{2}
+\abx@aux@page{12}{2}
+\abx@aux@page{13}{2}
 \abx@aux@cite{0}{radford2021learning}
 \abx@aux@segm{0}{0}{radford2021learning}
 \abx@aux@cite{0}{streetclip2023}
@@ -88,10 +92,6 @@
 \abx@aux@segm{0}{0}{bengio2009curriculum}
 \abx@aux@cite{0}{learnablemeta}
 \abx@aux@segm{0}{0}{learnablemeta}
-\abx@aux@page{10}{3}
-\abx@aux@page{11}{3}
-\abx@aux@page{12}{3}
-\abx@aux@page{13}{3}
 \abx@aux@page{14}{3}
 \abx@aux@page{15}{3}
 \@writefile{toc}{\contentsline {paragraph}{Vision-Language Models for Geolocation.}{3}{section.2}\protected@file@percent }
@@ -156,6 +156,8 @@
 \abx@aux@segm{0}{0}{srivastava2015highway}
 \abx@aux@cite{0}{arevalo2017gated}
 \abx@aux@segm{0}{0}{arevalo2017gated}
+\abx@aux@cite{0}{perez2018film}
+\abx@aux@segm{0}{0}{perez2018film}
 \@writefile{toc}{\contentsline {paragraph}{Cosine Similarity Classification.}{7}{equation.3.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Concept Bottleneck Options.}{7}{equation.3.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Training Objectives.}{7}{equation.3.9}\protected@file@percent }
@@ -164,90 +166,89 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stage 2: Gated Fusion Geolocation}{7}{subsection.3.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Cross-Attention for Spatial Context.}{7}{subsection.3.5}\protected@file@percent }
 \abx@aux@page{34}{7}
-\abx@aux@cite{0}{perez2018film}
-\abx@aux@segm{0}{0}{perez2018film}
-\@writefile{toc}{\contentsline {paragraph}{Learned Gating Mechanism.}{8}{equation.3.14}\protected@file@percent }
-\abx@aux@page{35}{8}
-\abx@aux@page{36}{8}
+\@writefile{toc}{\contentsline {paragraph}{Learned Gating Mechanism.}{7}{equation.3.14}\protected@file@percent }
+\abx@aux@page{35}{7}
+\abx@aux@page{36}{7}
 \abx@aux@page{37}{8}
 \@writefile{toc}{\contentsline {paragraph}{Prediction Heads.}{8}{equation.3.19}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{8}{section.4}\protected@file@percent }
 \newlabel{sec:experiments}{{4}{8}{Experiments}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Evaluation Metrics}{8}{subsection.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stage 1: Concept Classification Results}{8}{subsection.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }}{8}{table.caption.4}\protected@file@percent }
-\newlabel{tab:stage1}{{1}{8}{Stage 1 concept classification accuracy (\%) on the test split. The finetuned variant with Stage 0 pretraining shows improved parent concept accuracy, indicating better hierarchical structure learning.\relax }{table.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{9}{subsection.4.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Stage 2 geolocation performance on the in-distribution test split. The finetuned variant with gated fusion (``both'') achieves the best median error of 126 km by adaptively combining concept and spatial information.\relax }}{9}{table.caption.5}\protected@file@percent }
-\newlabel{tab:stage2_test}{{2}{9}{Stage 2 geolocation performance on the in-distribution test split. The finetuned variant with gated fusion (``both'') achieves the best median error of 126 km by adaptively combining concept and spatial information.\relax }{table.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage 1 concept classification accuracy (\%) on the test split.\relax }}{8}{table.caption.4}\protected@file@percent }
+\newlabel{tab:stage1}{{1}{8}{Stage 1 concept classification accuracy (\%) on the test split.\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Stage 2: Geolocation Results}{8}{subsection.4.3}\protected@file@percent }
 \abx@aux@cite{0}{fren-gor-geoguessr}
 \abx@aux@segm{0}{0}{fren-gor-geoguessr}
-\newlabel{fig:stage2_test_visual}{{4a}{10}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:stage2_test_visual}{{a}{10}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
-\newlabel{fig:stage2_hf_visual}{{4b}{10}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:stage2_hf_visual}{{b}{10}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }}{10}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:stage2_visual_results}{{4}{10}{Visual summary of Stage 2 geolocation performance. (a) In-distribution test split shows the finetuned variant with gated fusion achieving best performance. (b) Out-of-distribution evaluation on the external GeoGuessr dataset demonstrates generalization capability and substantial improvement over the GeoCLIP baseline.\relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{10}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{External GeoGuessr Dataset Evaluation.}{10}{subsection.4.4}\protected@file@percent }
-\abx@aux@page{38}{10}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset. Performance degrades compared to in-distribution data, with the finetuned variant showing better generalization.\relax }}{10}{table.caption.7}\protected@file@percent }
-\newlabel{tab:stage2_hf}{{3}{10}{Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset. Performance degrades compared to in-distribution data, with the finetuned variant showing better generalization.\relax }{table.caption.7}{}}
-\@writefile{toc}{\contentsline {paragraph}{GeoGuessr Game Evaluation.}{11}{table.caption.7}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }}{11}{table.caption.8}\protected@file@percent }
-\newlabel{tab:human_comparison}{{4}{11}{GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }{table.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{11}{subsection.4.5}\protected@file@percent }
-\newlabel{sec:interpretability}{{4.5}{11}{Interpretability Analysis}{subsection.4.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{Concept vs. Image Contribution.}{11}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Stage 2 geolocation performance on the in-distribution test split.\relax }}{9}{table.caption.5}\protected@file@percent }
+\newlabel{tab:stage2_test}{{2}{9}{Stage 2 geolocation performance on the in-distribution test split.\relax }{table.caption.5}{}}
+\newlabel{fig:stage2_test_visual}{{4a}{9}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:stage2_test_visual}{{a}{9}{Test split results across ablation modes and variants.\relax }{figure.caption.6}{}}
+\newlabel{fig:stage2_hf_visual}{{4b}{9}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:stage2_hf_visual}{{b}{9}{External HuggingFace dataset results with GeoCLIP baseline.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visual summary of Stage 2 geolocation performance across ablation modes and datasets.\relax }}{9}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:stage2_visual_results}{{4}{9}{Visual summary of Stage 2 geolocation performance across ablation modes and datasets.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Out-of-Distribution Evaluation}{9}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{External GeoGuessr Dataset Evaluation.}{9}{subsection.4.4}\protected@file@percent }
+\abx@aux@page{38}{9}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset.\relax }}{10}{table.caption.7}\protected@file@percent }
+\newlabel{tab:stage2_hf}{{3}{10}{Stage 2 geolocation performance on the external HuggingFace GeoGuessr dataset.\relax }{table.caption.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{GeoGuessr Game Evaluation.}{10}{table.caption.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }}{10}{table.caption.8}\protected@file@percent }
+\newlabel{tab:human_comparison}{{4}{10}{GeoGuessr game comparison: model vs human performance on 25 live rounds.\relax }{table.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{10}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:interpretability}{{4.5}{10}{Interpretability Analysis}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Concept vs. Image Contribution.}{10}{subsection.4.5}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Swap/Shuffle ablation results.\relax }}{11}{table.caption.9}\protected@file@percent }
 \newlabel{tab:swap_shuffle}{{5}{11}{Swap/Shuffle ablation results.\relax }{table.caption.9}{}}
-\@writefile{toc}{\contentsline {paragraph}{Qualitative Interpretability.}{12}{table.caption.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Gate Value Dynamics.}{12}{table.caption.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 90th percentile of learned gate values during validation. Both models converge to high values (0.83--0.86), with vanilla showing slightly higher concept reliance than finetuned.\relax }}{12}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:gate_distribution}{{5}{12}{90th percentile of learned gate values during validation. Both models converge to high values (0.83--0.86), with vanilla showing slightly higher concept reliance than finetuned.\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{12}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{12}{Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}\protected@file@percent }
-\newlabel{sec:conclusion}{{6}{13}{Conclusion}{section.6}{}}
-\abx@aux@page{39}{13}
-\abx@aux@page{40}{13}
-\abx@aux@page{41}{13}
-\abx@aux@page{42}{13}
-\abx@aux@page{43}{13}
-\abx@aux@page{44}{13}
-\abx@aux@page{45}{13}
-\abx@aux@page{46}{13}
-\abx@aux@page{47}{13}
-\abx@aux@page{48}{14}
-\abx@aux@page{49}{14}
-\abx@aux@page{50}{14}
-\abx@aux@page{51}{14}
-\abx@aux@page{52}{14}
-\abx@aux@page{53}{14}
-\abx@aux@page{54}{14}
-\abx@aux@page{55}{14}
-\abx@aux@page{56}{14}
-\abx@aux@page{57}{14}
-\abx@aux@page{58}{14}
-\abx@aux@page{59}{14}
-\abx@aux@page{60}{14}
-\abx@aux@page{61}{14}
-\abx@aux@page{62}{14}
-\abx@aux@page{63}{14}
-\abx@aux@page{64}{14}
-\abx@aux@page{65}{14}
-\abx@aux@page{66}{14}
-\abx@aux@page{67}{14}
-\abx@aux@page{68}{14}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Interpretability Examples}{15}{appendix.A}\protected@file@percent }
-\newlabel{app:interpretability}{{A}{15}{Interpretability Examples}{appendix.A}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Interpretability analysis for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion indicated by the gate value.\relax }}{15}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:interpretability_example_b}{{6}{15}{Interpretability analysis for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion indicated by the gate value.\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Interpretability analysis for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }}{16}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:interpretability_example_a}{{7}{16}{Interpretability analysis for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }{figure.caption.12}{}}
-\newlabel{LastPage}{{}{16}{}{page.16}{}}
-\xdef\lastpage@lastpage{16}
-\xdef\lastpage@lastpageHy{16}
+\@writefile{toc}{\contentsline {paragraph}{Qualitative Interpretability.}{11}{table.caption.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Gate Value Dynamics.}{11}{table.caption.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 90th percentile of learned gate values during validation. Both models converge to high values (0.83--0.86), with vanilla showing slightly higher concept reliance than finetuned.\relax }}{11}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:gate_distribution}{{5}{11}{90th percentile of learned gate values during validation. Both models converge to high values (0.83--0.86), with vanilla showing slightly higher concept reliance than finetuned.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{11}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{11}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{12}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{6}{12}{Conclusion}{section.6}{}}
+\abx@aux@page{39}{12}
+\abx@aux@page{40}{12}
+\abx@aux@page{41}{12}
+\abx@aux@page{42}{12}
+\abx@aux@page{43}{12}
+\abx@aux@page{44}{12}
+\abx@aux@page{45}{12}
+\abx@aux@page{46}{12}
+\abx@aux@page{47}{12}
+\abx@aux@page{48}{12}
+\abx@aux@page{49}{13}
+\abx@aux@page{50}{13}
+\abx@aux@page{51}{13}
+\abx@aux@page{52}{13}
+\abx@aux@page{53}{13}
+\abx@aux@page{54}{13}
+\abx@aux@page{55}{13}
+\abx@aux@page{56}{13}
+\abx@aux@page{57}{13}
+\abx@aux@page{58}{13}
+\abx@aux@page{59}{13}
+\abx@aux@page{60}{13}
+\abx@aux@page{61}{13}
+\abx@aux@page{62}{13}
+\abx@aux@page{63}{13}
+\abx@aux@page{64}{13}
+\abx@aux@page{65}{13}
+\abx@aux@page{66}{13}
+\abx@aux@page{67}{13}
+\abx@aux@page{68}{13}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Interpretability Examples}{14}{appendix.A}\protected@file@percent }
+\newlabel{app:interpretability}{{A}{14}{Interpretability Examples}{appendix.A}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Interpretability analysis for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion indicated by the gate value.\relax }}{14}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:interpretability_example_b}{{6}{14}{Interpretability analysis for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion indicated by the gate value.\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Interpretability analysis for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }}{15}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:interpretability_example_a}{{7}{15}{Interpretability analysis for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.\relax }{figure.caption.12}{}}
+\newlabel{LastPage}{{}{15}{}{page.15}{}}
+\xdef\lastpage@lastpage{15}
+\xdef\lastpage@lastpageHy{15}
 \abx@aux@read@bbl@mdfivesum{34C4F502B77C6B6D04D3A0AFBC93A692}
 \abx@aux@defaultrefcontext{0}{arevalo2017gated}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{bengio2009curriculum}{nyt/global//global/global}
@@ -279,4 +280,4 @@
 \abx@aux@defaultrefcontext{0}{weyand2016planet}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{yang2023language}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{yuksekgonul2022posthoc}{nyt/global//global/global}
-\gdef \@abspage@last{16}
+\gdef \@abspage@last{15}

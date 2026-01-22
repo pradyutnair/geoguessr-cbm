@@ -1378,14 +1378,14 @@ INPUT ./logo/logoUvA_en.pdf
 INPUT ./logo/logoUvA_en.pdf
 INPUT logo/logoUvA_en.pdf
 INPUT ./logo/logoUvA_en.pdf
-INPUT ./logo/logoUvA_en.pdf
-INPUT logo/logoUvA_en.pdf
-INPUT ./logo/logoUvA_en.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT ./logo/logoUvA_en.pdf
+INPUT logo/logoUvA_en.pdf
+INPUT ./logo/logoUvA_en.pdf
 INPUT ./analysis/stage2_test_split_results.png
 INPUT ./analysis/stage2_test_split_results.png
 INPUT analysis/stage2_test_split_results.png
@@ -1396,9 +1396,6 @@ INPUT ./analysis/stage2_hf_results.png
 INPUT analysis/stage2_hf_results.png
 INPUT ./analysis/stage2_hf_results.png
 INPUT ./analysis/stage2_hf_results.png
-INPUT ./logo/logoUvA_en.pdf
-INPUT logo/logoUvA_en.pdf
-INPUT ./logo/logoUvA_en.pdf
 INPUT ./logo/logoUvA_en.pdf
 INPUT logo/logoUvA_en.pdf
 INPUT ./logo/logoUvA_en.pdf
