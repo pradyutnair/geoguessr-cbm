@@ -1,7 +1,7 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {section}{\numberline {2}Related Work}{2}{section.2}%
-\contentsline {paragraph}{Visual Geolocation.}{2}{section.2}%
+\contentsline {section}{\numberline {2}Related Work}{3}{section.2}%
+\contentsline {paragraph}{Visual Geolocation.}{3}{section.2}%
 \contentsline {paragraph}{Vision-Language Models for Geolocation.}{3}{section.2}%
 \contentsline {paragraph}{Concept Bottleneck Models.}{3}{section.2}%
 \contentsline {section}{\numberline {3}Methodology}{3}{section.3}%
@@ -29,10 +29,13 @@
 \contentsline {paragraph}{External GeoGuessr Dataset Evaluation.}{9}{subsection.4.4}%
 \contentsline {paragraph}{GeoGuessr Game Evaluation.}{10}{table.caption.7}%
 \contentsline {subsection}{\numberline {4.5}Interpretability Analysis}{10}{subsection.4.5}%
-\contentsline {paragraph}{Concept vs. Image Contribution.}{10}{subsection.4.5}%
-\contentsline {paragraph}{Qualitative Interpretability.}{11}{table.caption.9}%
-\contentsline {paragraph}{Gate Value Dynamics.}{11}{table.caption.9}%
-\contentsline {section}{\numberline {5}Discussion}{11}{section.5}%
-\contentsline {paragraph}{Limitations.}{12}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}%
-\contentsline {section}{\numberline {A}Interpretability Examples}{14}{appendix.A}%
+\contentsline {paragraph}{Gate Value Dynamics.}{10}{subsection.4.5}%
+\contentsline {paragraph}{Concept vs. Image Contribution.}{11}{figure.caption.9}%
+\contentsline {paragraph}{Concept Prediction Analysis.}{12}{table.caption.10}%
+\contentsline {paragraph}{Qualitative Interpretability and Failure Cases.}{13}{figure.caption.11}%
+\contentsline {section}{\numberline {5}Discussion}{13}{section.5}%
+\contentsline {paragraph}{Limitations.}{13}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{14}{section.6}%
+\contentsline {section}{\numberline {A}Interpretability Examples}{16}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Successful Predictions}{16}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Failure Cases}{18}{subsection.A.2}%

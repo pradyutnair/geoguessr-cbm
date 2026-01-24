@@ -17,6 +17,7 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{titlesec}
+\usepackage{hyperref}
 
 % Reduce top margin on first page
 % \newgeometry{top=25mm, bottom=25mm, left=30mm, right=30mm}
@@ -62,7 +63,7 @@
 \pagebreak
 
 \begin{abstract}
-Image geolocation remains challenging due to visual ambiguity across regions. Existing approaches achieve reasonable accuracy but operate as black boxes, providing no insight into \textit{why} a location is predicted. We propose a concept-aware geolocation system using hierarchical concept bottleneck models that ensure predictions flow through interpretable semantic concepts. Our three-stage pipeline combines contrastive pretraining, text-anchored concept learning, and gated fusion for coordinate prediction. On a 43,000-image street view dataset, we achieve 126~km median error on in-distribution data and 350~km on out-of-distribution GeoGuessr images, while providing patch-level attention maps revealing which visual regions support concept-based predictions. Our code is available at \url{https://github.com/pradyutnair/geoguessr-cbm}.
+Image geolocation, the task of predicting geographic coordinates from visual input, remains challenging due to the inherent ambiguity of similar-looking scenes across different regions. While existing approaches achieve reasonable accuracy through end-to-end learning, they operate as black boxes, providing no insight into \textit{why} a particular location is predicted. We propose a concept-aware geolocation system using hierarchical concept bottleneck models that ensure all predictions flow through human-interpretable semantic concepts. Our three-stage curriculum learning pipeline combines domain-specific contrastive pretraining, text-anchored hierarchical concept learning, and cross-attention-based gated fusion for coordinate prediction. The architecture learns 2,126 fine-grained child concepts organized under 257 parent categories, capturing geographic indicators ranging from infrastructure elements (bollards, road markings, utility poles) to environmental features (vegetation, architecture, landscape). On a 43,000-image street view dataset, we achieve 126~km median error on in-distribution data and 350~km on out-of-distribution GeoGuessr images, while providing patch-level attention maps that reveal which visual regions support concept-based predictions. Ablation analysis confirms that concept embeddings carry the primary geographic signal, with concept-only predictions achieving within 10\% of full model performance. Our code is available at \url{https://github.com/pradyutnair/geoguessr-cbm}.
 \end{abstract}
 
 %-------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ We propose a concept-aware geolocation system that predicts locations through ex
 \label{sec:related}
 
 \paragraph{Visual Geolocation.}
-Visual geolocation research has evolved from retrieval-based methods \parencite{hays2008im2gps} to classification over geographic partitions. PlaNet \parencite{weyand2016planet} demonstrated that training CNNs to classify images into approximately 26,000 S2 cells \parencite{s2geometry} could achieve reasonable global geolocation. Hierarchical approaches \parencite{muller2018geolocation} improved performance by predicting at multiple spatial scales, while CPlaNet \parencite{seo2018cpl} introduced combinatorial partitioning for finer-grained predictions. More recently, TransLocator \parencite{pramanick2022world} applied transformers to geolocation through scene classification and geographic cell prediction. ISNs \parencite{muller2018geolocation} pioneered the use of individual scene networks that specialize in different geographic regions, enabling more fine-grained predictions. PIGEON \parencite{haas2024pigeon} achieved expert-level performance on GeoGuessr by combining CLIP-based features with sophisticated geocell prediction, demonstrating that vision-language models provide strong foundations for geolocation tasks.
+Visual geolocation research has evolved from retrieval-based methods \parencite{hays2008im2gps} to classification over geographic partitions. PlaNet \parencite{weyand2016planet} demonstrated that training CNNs to classify images into approximately 26,000 S2 cells \parencite{s2geometry} could achieve reasonable global geolocation. Hierarchical approaches \parencite{muller2018geolocation} improved performance by predicting at multiple spatial scales, while CPlaNet \parencite{seo2018cpl} introduced combinatorial partitioning for finer-grained predictions. More recently, TransLocator \parencite{pramanick2022world} applied transformers to geolocation through scene classification and geographic cell prediction. ISNs \parencite{muller2018geolocation} pioneered the use of individual scene networks that specialize in different geographic regions, enabling more fine-grained predictions. PIGEON \parencite{haas2024pigeon} combines CLIP-based features with sophisticated geocell prediction, demonstrating that vision-language models provide strong foundations for geolocation tasks.
 
 \paragraph{Vision-Language Models for Geolocation.}
 CLIP \parencite{radford2021learning} learns aligned vision-language representations through contrastive learning on 400 million image-text pairs, enabling zero-shot transfer to novel visual concepts through natural language descriptions. StreetCLIP \parencite{streetclip2023} fine-tunes CLIP specifically on street view imagery, improving performance on geographically-relevant visual recognition tasks. GeoCLIP \parencite{cepeda2023geoclip} extends this paradigm by training a location encoder alongside CLIP's image encoder, learning joint embeddings where visually similar locations cluster together regardless of their geographic distance. Cross-view approaches \parencite{toker2021satellite_cvpr} have explored matching street-level imagery with overhead satellite views for localization, leveraging the complementary information available from different viewpoints.
@@ -272,7 +273,7 @@ K &= V = W_P \cdot P \in \mathbb{R}^{576 \times 512} \quad (\text{projected patc
 where $W_P \in \mathbb{R}^{512 \times 1024}$ projects patch tokens to the concept embedding dimension. Attention weights reshape to a $24 \times 24$ spatial map for interpretable visualization.
 
 \paragraph{Learned Gating Mechanism.}
-The key innovation is combining the concept embedding with cross-attention output through a learned gate \parencite{srivastava2015highway, arevalo2017gated}:
+The concept embedding and cross-attention output are combined through a learned gate \parencite{srivastava2015highway, arevalo2017gated}:
 \begin{align}
 z_{\text{spatial}} &= \text{FFN}(\text{LayerNorm}(z + \text{attn})) \in \mathbb{R}^{512} \\
 z_{\text{combined}} &= \text{concat}(z, z_{\text{spatial}}) \in \mathbb{R}^{1024} \\
@@ -430,31 +431,12 @@ Human & 849.0 & 2643.0 & 2830 & 2665 \\
 
 Our concept-aware geolocation system provides interpretability through patch-level attention visualization, hierarchical concept predictions, and learned gating mechanisms.
 
-\paragraph{Concept vs. Image Contribution.}
-To quantify the relative importance of semantic concepts versus visual features, we perform controlled ablation by shuffling inputs across the batch during inference. Specifically, we evaluate three conditions: (1) \textit{baseline}, where concept embeddings and patch tokens are correctly paired with their source images; (2) \textit{concept shuffled}, where concept embeddings are randomly permuted across the batch while patch tokens remain aligned to their original images; and (3) \textit{patches shuffled}, where patch tokens are permuted while concept embeddings remain aligned. This design isolates each modality's contribution: if shuffling a modality causes large degradation, the model relies heavily on proper alignment of that modality for accurate predictions.
-
-Table~\ref{tab:swap_shuffle} presents the results on the validation set. Shuffling concept embeddings increases median error from 28.6~km to 8340.5~km, a 291$\times$ degradation reducing predictions to near-random guessing. In contrast, shuffling patch tokens causes only 1.35$\times$ degradation to 38.6~km. This asymmetry confirms that learned semantic concepts serve as the primary signal for geolocation, encoding geographic information through text-anchored prototypes for features like script type, road signs, vegetation, and architectural style. Cross-attention over image patches provides complementary spatial refinement ($\sim$10~km), attending to fine-grained visual details that disambiguate nearby locations sharing similar semantic properties.
-
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{lrr}
-        \toprule
-        \textbf{Condition} & \textbf{Median Error (km)} & \textbf{Degradation} \\
-        \midrule
-        Baseline & 28.6 & 1.00$\times$ \\
-        Concept Shuffled & 8340.5 & 291$\times$ \\
-        Patches Shuffled & 38.6 & 1.35$\times$ \\
-        \bottomrule
-    \end{tabular}
-    \caption{Swap/Shuffle ablation results.}
-    \label{tab:swap_shuffle}
-\end{table}
-
-\paragraph{Qualitative Interpretability.}
-Figures~\ref{fig:interpretability_example_b} and~\ref{fig:interpretability_example_a} (Appendix~\ref{app:interpretability}) present per-image interpretability outputs: input panorama, patch attention heatmaps, geographic predictions with cell assignments, gate values, and hierarchical concept predictions. The model identifies scene-level attributes correlating with geographic regions (e.g., ``script\_cyrillic'' for Russian locations). Attention concentrates on semantically relevant regions such as road surfaces, signage, vegetation, and architecture. More examples are available in our code repository.
-
 \paragraph{Gate Value Dynamics.}
-Across the validation set, gate values have mean 0.44 (near-balanced), standard deviation 0.27, and span the full range [0.01, 0.99], confirming the model leverages both information sources rather than collapsing to a single modality. Figure~\ref{fig:gate_distribution} shows both variants converge to high 90th-percentile values (0.83--0.86), with vanilla showing slightly higher concept reliance than finetuned, which leverages both sources more effectively through learned spatial representations.
+The learned gating mechanism provides quantitative insight into how the model balances semantic concepts versus spatial visual features for geolocation predictions. Recall that gate values near 1.0 indicate reliance on concept embeddings, values near 0.0 indicate reliance on cross-attention spatial features, and values near 0.5 represent balanced contribution from both sources.
+
+Across the validation set, gate values exhibit mean 0.44 and standard deviation 0.27, spanning nearly the full range [0.01, 0.99]. This wide distribution indicates that different embedding dimensions specialize in different information sources rather than uniformly weighting both. The slight bias toward spatial features (mean $<$ 0.5) suggests the cross-attention mechanism contributes meaningful refinement beyond what concepts alone provide.
+
+Figure~\ref{fig:gate_distribution} tracks the 90th percentile of gate values during training for both model variants. Both converge to high values (0.83--0.86), indicating that a substantial subset of dimensions rely primarily on concept information. The vanilla model exhibits slightly higher gate values than the finetuned variant, suggesting that without Stage 0 pretraining, the model compensates by relying more heavily on semantic concepts. The finetuned model, having learned richer spatial representations through contrastive pretraining, achieves a more balanced integration of both information sources. This difference in gate dynamics provides interpretable evidence that Stage 0 pretraining improves the quality of learned spatial representations, enabling more effective multimodal fusion.
 
 \begin{figure}[H]
     \centering
@@ -463,6 +445,57 @@ Across the validation set, gate values have mean 0.44 (near-balanced), standard 
     \label{fig:gate_distribution}
 \end{figure}
 
+\paragraph{Concept vs. Image Contribution.}
+To quantify the relative importance of semantic concepts versus visual features in our cross-attention architecture, we perform controlled ablation by shuffling inputs across the batch during inference. Recall that the Stage~2 model receives two inputs: (1) concept embeddings $\mathbf{c} \in \mathbb{R}^{B \times 512}$ from the frozen Stage~1 bottleneck, and (2) patch tokens $\mathbf{P} \in \mathbb{R}^{B \times 576 \times 1024}$ from the frozen ViT encoder, where $B$ is the batch size. The cross-attention mechanism uses concept embeddings as queries and projected patch tokens as keys/values, fusing both modalities for geocell classification and offset regression.
+
+We evaluate three conditions by manipulating the pairing between these inputs:
+\begin{itemize}
+    \item \textit{Baseline}: Concept embedding $\mathbf{c}_i$ is paired with patch tokens $\mathbf{P}_i$ from the same image $i$, representing normal inference.
+    \item \textit{Concept shuffled}: We apply a random permutation $\pi$ to concept embeddings, pairing $\mathbf{c}_{\pi(i)}$ with $\mathbf{P}_i$. This breaks the concept-image alignment while preserving correct patch-image alignment.
+    \item \textit{Patches shuffled}: We apply a random permutation $\sigma$ to patch tokens, pairing $\mathbf{c}_i$ with $\mathbf{P}_{\sigma(i)}$. This breaks the patch-image alignment while preserving correct concept-image alignment.
+\end{itemize}
+
+This design isolates each modality's contribution: if the model relies heavily on a particular modality, shuffling it will cause large performance degradation because the model receives features from a mismatched image. For each condition, we compute the haversine distance between predicted and ground-truth coordinates for all samples in the validation set, and report the median error as a robust summary statistic.
+
+Table~\ref{tab:swap_shuffle} presents the results. Shuffling concept embeddings increases median error from 28.6~km to 8340.5~km, which is 291$\times$ degradation in performance. Given that Earth's mean radius is approximately 6,371~km \parencite{Moritz1980}, an 8340~km median error indicates predictions are effectively random across the globe. In contrast, shuffling patch tokens causes only 1.35$\times$ degradation to 38.6~km, a modest 10~km increase from baseline.
+
+This asymmetry provides strong evidence that our Concept Bottleneck Model architecture functions as intended: geolocation predictions 
+flow through the semantic concept bottleneck rather than bypassing it via low-level visual shortcuts. The Stage~1 text-prototype classifier extracts meaningful geographic indicators, such as script type (Cyrillic, Latin, Arabic), road features (signs, lane markings), vegetation, and architectural style, which act as the primary cues for inferring location. Meanwhile, the image patch cross-attention mechanism adds spatial detail, allowing the model to focus on fine-grained aspects like sign variants or pavement textures that help distinguish geographically close, semantically similar scenes.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lrr}
+        \toprule
+        \textbf{Condition} & \textbf{Median Error (km)} & \textbf{Degradation} \\
+        \midrule
+        Baseline & 28.6 & 1.00$\times$ \\
+        Patches Shuffled & 38.6 & 1.35$\times$ \\
+        Concept Shuffled & 8340.5 & 291$\times$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Swap/shuffle ablation quantifying concept vs.\ image contribution on the validation set. Shuffling concepts causes catastrophic degradation (291$\times$), while shuffling patches causes minimal impact (1.35$\times$), confirming that semantic concepts are the dominant geolocation signal and the CBM bottleneck is not bypassed.}
+    \label{tab:swap_shuffle}
+\end{table}
+
+\paragraph{Concept Prediction Analysis.}
+To understand what geographic indicators the model relies upon, we analyze concept predictions across 3,146 test samples (Figure~\ref{fig:concept_analysis}). The model uses 761 of 2,126 child concepts and 173 of 257 parent concepts, demonstrating selective reliance on discriminative features rather than uniform vocabulary usage. Prediction concentration follows a long-tail distribution: the top 10 concepts account for 16.3\% of all predictions, while 1,365 concepts are never predicted.
+
+Infrastructure-related concepts dominate predictions, with ``Bollard'' and ``Roadlines'' each comprising 2.5\% of predictions, followed by ``Unique Car'' (1.7\%) and ``Mountains'' (1.5\%). At the parent level, ``building\_facade'' (5.3\%), ``bollard\_design'' (3.7\%), ``road\_sign'' (3.6\%), and ``script\_latin'' (3.6\%) are most frequent, reflecting the model's reliance on human-built infrastructure as primary geographic discriminators.
+
+Average prediction confidence is 0.12 for child concepts and 0.29 for parent concepts. Notably, frequently predicted concepts exhibit higher confidence (e.g., ``Roadlines'': 0.28, ``Ten Digit Yellow Pole Codes'': 0.24), suggesting the model has learned robust representations for common visual patterns. The correlation between prediction frequency and confidence indicates that rarely predicted concepts may represent edge cases where the model is less certain.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{concept_analysis_stage2/top_concepts.png}
+    \caption{Top 30 predicted child concepts (left) and their average confidence scores (right). Infrastructure concepts dominate, with confidence correlating with prediction frequency.}
+    \label{fig:concept_analysis}
+\end{figure}
+
+\paragraph{Qualitative Interpretability and Failure Cases.}
+Figures~\ref{fig:interpretability_example_b} and~\ref{fig:interpretability_example_a} (Appendix~\ref{app:interpretability}) present successful predictions with per-image interpretability outputs: input panorama, patch attention heatmaps, geographic predictions, gate values, and hierarchical concept predictions. The model identifies scene-level attributes correlating with geographic regions, with attention concentrating on semantically relevant regions.
+
+Failure case analysis highlights several consistent error patterns in the model's predictions (Figures~\ref{fig:failure_french} and~\ref{fig:failure_bollard}). In Figure~\ref{fig:failure_french}, the model predicts Tunisia as the location but assigns high activations to concepts such as ``French Infrastructure'' and ``Chevrons,'' even though there is little visual evidence of these features in the scene. This suggests that image or model priors are influencing concept prediction, causing the model to invoke concepts based on contextual expectation or prior associations with Tunisia rather than faithfully representing the visual input. The model appears to predict concepts it expects to see instead of those that are actually present in the image. In Figure~\ref{fig:failure_bollard}, the model incorrectly predicts ``Bollards'' and ``Austrian bollards'' in a setting that does not feature any bollards, apparently influenced by visual cues such as the camera's shadow or generalized landscape patterns that the model has learned to associate with Central Europe. These examples illustrate two major types of failure: (1) concept prediction driven by dataset or model priors rather than true visual evidence, and (2) concept hallucination, in which landscape or distinct features that mislead model predictions.
+
 %-------------------------------------------------------------------------------
 %	DISCUSSION
 %-------------------------------------------------------------------------------
@@ -470,15 +503,15 @@ Across the validation set, gate values have mean 0.44 (near-balanced), standard 
 \section{Discussion}
 \label{sec:discussion}
 
-The interpretability-accuracy trade-off proves minimal: concept-only predictions achieve within 10\% of full model performance (137~km vs 126~km). The 512-dimensional concept embedding captures sufficient geographic information for competitive geolocation while providing human-interpretable intermediate representations.
+The interpretability-accuracy trade-off proves minimal: concept-only predictions achieve within 10\% of full model performance (137~km vs 126~km). The 512-dimensional concept embedding captures sufficient geographic information for competitive geolocation while providing human-interpretable intermediate representations. Despite 46\% top-1 concept accuracy, interpretability is maintained because top-5 accuracy exceeds 70\% and the model selectively uses 761 of 2,126 concepts, focusing on discriminative geographic indicators rather than the full vocabulary.
 
-Stage 0 contrastive pretraining provides consistent benefits on both in-distribution and out-of-distribution data, reducing median error from 133~km to 126~km on test data and from 392~km to 350~km on GeoGuessr. This improvement demonstrates that contrastive pretraining learns broadly transferable representations. The GPS adapter (512d$\to$768d) proves critical for aligning GeoCLIP location embeddings with StreetCLIP image features.
+Stage 0 contrastive pretraining provides consistent benefits on both in-distribution and out-of-distribution data, reducing median error from 133~km to 126~km on test data and from 392~km to 350~km on GeoGuessr. This improvement demonstrates that contrastive pretraining learns broadly transferable representations. The GPS adapter (512d$\to$768d) proves critical for aligning GeoCLIP location embeddings with StreetCLIP image features. Our approach substantially outperforms the GeoCLIP baseline (350~km vs 1016~km on the external dataset), though direct comparison to methods like PIGEON is not possible due to different training data and evaluation protocols.
 
 Hierarchical concept organization enhances representation learning. The finetuned variant shows substantially improved parent concept accuracy (48.0\% vs 38.6\% for vanilla), indicating that contrastive pretraining helps establish correct semantic relationships between fine-grained child concepts and coarse parent categories. Consistency losses ensure child predictions aggregate correctly to parent levels, providing multiple granularities of interpretable output.
 
 Adaptive geocell generation effectively allocates prediction granularity according to data density. Per-country clustering enables dense regions like Western Europe and East Asia to receive finer cells, while maintaining global coverage through coarser cells in sparse regions.
 
-\paragraph{Limitations.} Our dataset of 43,040 images may not capture the full variety of global street view imagery. The concept vocabulary derived from training data may miss important geographic indicators present in other regions. The substantial performance gap between in-distribution (126~km) and out-of-distribution (350~km) data suggests limited generalization, likely due to dataset-specific concept distributions. While gated fusion provides interpretability through gate values, the concept embeddings remain high-dimensional vectors requiring further analysis to fully interpret.
+\paragraph{Limitations.} Our dataset of 43,040 images may not capture the full variety of global street view imagery. The concept vocabulary derived from training data may miss important geographic indicators present in other regions. The substantial performance gap between in-distribution (126~km) and out-of-distribution (350~km) data suggests limited generalization, likely due to dataset-specific concept distributions. Failure case analysis reveals two systematic error modes: (1) correct concept identification with wrong geographic mapping, particularly for colonial-era infrastructure shared across regions; and (2) concept hallucination based on landscape priors when distinctive features are absent. While gated fusion provides interpretability through gate values, concept embeddings remain high-dimensional vectors requiring further analysis.
 
 %-------------------------------------------------------------------------------
 %	CONCLUSION
@@ -489,9 +522,9 @@ Adaptive geocell generation effectively allocates prediction granularity accordi
 
 We present a concept-aware geolocation system that predicts geographic coordinates through interpretable semantic reasoning. By combining hierarchical concept bottleneck models with vision-language foundations, we achieve 126~km median error on test data and 350~km on out-of-distribution GeoGuessr images while providing human-understandable explanations through concept activations and learned gate values.
 
-Our three-stage curriculum learning pipeline demonstrates the value of progressive specialization: domain contrastive pretraining establishes geographic representations, text-anchored prototype learning acquires semantic concepts, and gated fusion combines concept and spatial information for coordinate prediction. Ablation analysis validates that predictions flowing through the concept bottleneck sacrifice minimal accuracy compared to direct image-based prediction, establishing a favorable interpretability-accuracy trade-off.
+Our three-stage curriculum learning pipeline demonstrates the value of progressive specialization: domain contrastive pretraining establishes geographic representations, text-anchored prototype learning acquires semantic concepts, and gated fusion combines concept and spatial information for coordinate prediction. Ablation analysis validates that predictions flowing through the concept bottleneck sacrifice minimal accuracy compared to direct image-based prediction. Detailed concept analysis reveals the model selectively uses 761 of 2,126 concepts with clear country-specific associations, while failure case analysis identifies systematic error modes including colonial infrastructure misattribution and concept hallucination.
 
-Future directions include: (1) expanding the dataset for improved concept coverage and finer-grained geolocation, (2) automatic concept discovery to reduce reliance on curated vocabularies, and (3) integration with retrieval-based methods for hybrid prediction.
+Future directions include: (1) expanding the dataset for improved concept coverage and generalization, (2) automatic concept discovery to reduce reliance on curated vocabularies, (3) addressing geographic-semantic mapping failures through region-aware training, and (4) integration with retrieval-based methods for hybrid prediction.
 
 %-------------------------------------------------------------------------------
 %	REFERENCES
@@ -507,19 +540,36 @@ Future directions include: (1) expanding the dataset for improved concept covera
 \section{Interpretability Examples}
 \label{app:interpretability}
 
+\subsection{Successful Predictions}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{round_01_110135_concepts.png}
-    \caption{Interpretability analysis for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion indicated by the gate value.}
+    \includegraphics[width=0.85\textwidth]{game-analysis/round_01_110135_concepts.png}
+    \caption{Successful prediction for a European scene. The patch attention heatmap reveals focus on road geometry and built structures. Concept predictions capture semantic categories relevant to the predicted region, with balanced concept-image fusion (gate 0.47).}
     \label{fig:interpretability_example_b}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{round_09_110825_concepts.png}
-    \caption{Interpretability analysis for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts include ``Unique car'' and ``License Plates''; parent concepts indicate ``car\_meta'' and ``landscape\_savannah'' categories.}
+    \includegraphics[width=0.85\textwidth]{game-analysis/round_09_110825_concepts.png}
+    \caption{Successful prediction for a West African scene. The model identifies this location through distinctive visual cues including unique vehicles and license plates (gate 0.431). Top child concepts: ``Unique car'', ``License Plates''; parent concepts: ``car\_meta'', ``landscape\_savannah''.}
     \label{fig:interpretability_example_a}
 \end{figure}
 
+\subsection{Failure Cases}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{game-analysis/round_04_110256_concepts-french-infrastructure-failure-case.png}
+    \caption{Failure case: French infrastructure misattribution. The model correctly identifies ``French Infrastructure'' and ``Chevrons'' concepts but predicts Tunisia (35.4$^\circ$N, 10.2$^\circ$E) instead of the actual location. This illustrates colonial-era infrastructure creating misleading geographic associations.}
+    \label{fig:failure_french}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{game-analysis/round_04_110933_concepts-failure-case.png}
+    \caption{Failure case: Hallucinated bollard concepts. The model predicts ``Bollards'' and ``Austrian bollards'' for a forested scene (42.6$^\circ$N, 19.2$^\circ$E) where no bollards are visible. The model mistakes the camera shadow for a bollard and relies on landscape features that correlate with Central European regions in training data rather than actual bollard detection.}
+    \label{fig:failure_bollard}
+\end{figure}
 
 \end{document}
