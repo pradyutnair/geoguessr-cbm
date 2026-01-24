@@ -639,38 +639,6 @@
       \field{title}{Decoupled Weight Decay Regularization}
       \field{year}{2017}
     \endentry
-    \entry{Moritz1980}{article}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=3efd5c7face9b15e306b705681a43e15}{%
-           family={Moritz},
-           familyi={M\bibinitperiod},
-           given={Helmut},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{3efd5c7face9b15e306b705681a43e15}
-      \strng{fullhash}{3efd5c7face9b15e306b705681a43e15}
-      \strng{bibnamehash}{3efd5c7face9b15e306b705681a43e15}
-      \strng{authorbibnamehash}{3efd5c7face9b15e306b705681a43e15}
-      \strng{authornamehash}{3efd5c7face9b15e306b705681a43e15}
-      \strng{authorfullhash}{3efd5c7face9b15e306b705681a43e15}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Bulletin Géodésique}
-      \field{number}{3}
-      \field{title}{Geodetic Reference System 1980}
-      \field{volume}{54}
-      \field{year}{1980}
-      \field{pages}{395\bibrangedash 405}
-      \range{pages}{11}
-      \verb{doi}
-      \verb 10.1007/BF02521480
-      \endverb
-    \endentry
     \entry{muller2018geolocation}{inproceedings}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=b36548a2ad2bb8ee46461cf62f4eee9c}{%

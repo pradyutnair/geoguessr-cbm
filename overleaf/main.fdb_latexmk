@@ -1,13 +1,13 @@
 # Fdb version 3
-["biber main"] 1769251494 "main.bcf" "main.bbl" "main" 1769251922
-  "main.bcf" 1769251922 111191 a28e4cabc0078bbd0fffa7b1771ff67a "pdflatex"
+["biber main"] 1769252219 "main.bcf" "main.bbl" "main" 1769253444
+  "main.bcf" 1769253444 111085 e652d341799ef9a7486b3da0211eba44 "pdflatex"
   "references.bib" 1769251467 11409 646d022ad451734611baff72985ff828 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1769251904 "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" "main.pdf" "main" 1769251922
+["pdflatex"] 1769253425 "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" "main.pdf" "main" 1769253444
   "/etc/texmf/web2c/texmf.cnf" 1732966747 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" 1769251898 50824 c19c59251e64d4ddefc36b8e502bff8f ""
+  "/home/pradyutnair/geoguessr-cbm/overleaf/main.tex" 1769253425 50720 82d75aca40e81253d91584f1a19ea4ae ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -242,7 +242,7 @@
   "analysis/stage2_test_split_results.png" 1767800143 456751 283dbdf62d42864716d803aaa1ab61f7 ""
   "architecture/stage0.png" 1769083306 183589 80f6c63051317936a39cbef18e3da045 ""
   "architecture/stage1_2.png" 1769092994 239565 150020de402636a88a21ca08684107a7 ""
-  "concept_analysis_stage2/top_concepts.png" 1769105620 341529 4dc9c9be78f07e886e44dff082bf2d18 ""
+  "concept_analysis_stage2/top_concepts.png" 1769252830 587943 fcdea07723b484ee9f6d98bbe3eb69fb ""
   "game-analysis/round_01_110135_concepts.png" 1767949817 5107692 7e94125a15b5417a392b9abaa4a9d012 ""
   "game-analysis/round_04_110256_concepts-french-infrastructure-failure-case.png" 1769248267 2626415 5a62940edba83295238e106fefb4952c ""
   "game-analysis/round_04_110933_concepts-failure-case.png" 1769248267 3526331 8b5e3f974b52843f01a9b33113a88999 ""
@@ -250,13 +250,13 @@
   "geocells_map/cell_distribution_finetuned_both.png" 1766743215 141909 dbb7296dda407a7fe7b327dea9434ec3 ""
   "geocells_map/geocells_map_finetuned_both.png" 1766743215 4420273 b4ed8aac56c3d72a67f04432bb5517ed ""
   "logo/logoUvA_en.pdf" 1766722088 9956 8b484410a3b005c3081765caf4d4e6dd ""
-  "main.atfi" 1769251922 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1769251922 23894 b8907dca99f83e291c2bba17268d667e "pdflatex"
-  "main.bbl" 1769251496 58582 966825e5e7e9e71ae66b5909024a7f48 "biber main"
-  "main.out" 1769251922 3190 655318ae2fa9905bb45ef7c92fc437ec "pdflatex"
-  "main.run.xml" 1769251922 2355 f8a7ea4eed03fb7e1a549c00c2df8aeb "pdflatex"
-  "main.tex" 1769251898 50824 c19c59251e64d4ddefc36b8e502bff8f ""
-  "main.toc" 1769251922 3185 7bd8945fd4723ee5f4bf31d325cad806 "pdflatex"
+  "main.atfi" 1769253444 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1769253444 22972 ced4178724000cddb7843f76023215ce "pdflatex"
+  "main.bbl" 1769252220 57363 34c4f502b77c6b6d04d3a0afbc93a692 "biber main"
+  "main.out" 1769253444 3190 655318ae2fa9905bb45ef7c92fc437ec "pdflatex"
+  "main.run.xml" 1769253444 2355 f8a7ea4eed03fb7e1a549c00c2df8aeb "pdflatex"
+  "main.tex" 1769253425 50720 82d75aca40e81253d91584f1a19ea4ae ""
+  "main.toc" 1769253444 3185 7bd8945fd4723ee5f4bf31d325cad806 "pdflatex"
   "metas/czechia_bollard.png" 1769093395 341110 71bcf2ae3a737f781370f4efd2b0f7e0 ""
   "metas/nigeria-car.png" 1769093527 233824 9d564bd5af8d3aa43fdeca19e393cd91 ""
   "metas/south-korea-pole.png" 1769093498 605113 003c1576d78bd961498c32ace814aeb7 ""

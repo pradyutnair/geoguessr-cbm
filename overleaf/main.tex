@@ -137,7 +137,7 @@ Our approach follows a curriculum learning strategy \parencite{bengio2009curricu
 \subsection{Dataset and Preprocessing}
 
 
-We train and evaluate on a dataset of 43,040 street view panorama images sourced from LearnableMeta \parencite{learnablemeta}, which curates GeoGuessr ``metas''---recurring visual patterns that help identify specific regions, such as distinctive road markings, unique vehicle types, or country-specific infrastructure like bollards and utility poles (Figure~\ref{fig:meta_examples}). Each sample contains a panoramic street view image, GPS coordinates, country name, the meta name, and a descriptive note. The meta name serves as the fine-grained child concept label (e.g., ``Urban Street'', ``Suburban Road''), while parent concept labels reflect broader categories (e.g., ``Urban'', ``Rural''), providing a hierarchical semantic structure.
+We train and evaluate on a dataset of 43,040 street view panorama images sourced from LearnableMeta \parencite{learnablemeta}, which curates GeoGuessr ``metas,'' recurring visual patterns that help identify specific regions, such as distinctive road markings, unique vehicle types, or country-specific infrastructure like bollards and utility poles (Figure~\ref{fig:meta_examples}). Each sample contains a panoramic street view image, GPS coordinates, country name, the meta name, and a descriptive note. The meta name serves as the fine-grained child concept label (e.g., ``Urban Street'', ``Suburban Road''), while parent concept labels reflect broader categories (e.g., ``Urban'', ``Rural''), providing a hierarchical semantic structure.
 
 \begin{figure}[H]
     \centering
@@ -301,7 +301,7 @@ Stage 2 trains for 30 epochs with batch size 32 and learning rate $1 \times 10^{
 \section{Experiments}
 \label{sec:experiments}
 
-We evaluate our approach on both in-distribution test data and an out-of-distribution GeoGuessr dataset to assess generalization. All experiments compare two model variants: vanilla (Stage 1 and 2 using default pretrained StreetCLIP only, without Stage 0 pretraining) and finetuned (complete three-stage pipeline with Stage 0 pretraining).
+We evaluate our approach on both in-distribution test data and an out-of-distribution GeoGuessr dataset to assess generalization. All experiments compare two model variants: vanilla (Stage 1 and 2 using default pretrained StreetCLIP only, without Stage 0 pretraining) and finetuned (complete three-stage pipeline with Stage 0 pretraining). Results reported are from the best checkpoint; performance was stable across training runs.
 
 \subsection{Evaluation Metrics}
 
@@ -410,7 +410,7 @@ Median error increases substantially compared to in-distribution results (350~km
 \paragraph{GeoGuessr Game Evaluation.}
 To assess real-time interactive performance, we deployed our model through a FastAPI-based inference server and integrated it directly with GeoGuessr's game API. This automated bot system captures panoramic imagery from active game rounds, submits predictions through GeoGuessr's endpoints, and records scores and distances exactly as human players experience them. We evaluated on 5 games totaling 25 rounds spanning diverse global locations.
 
-Table~\ref{tab:human_comparison} presents results comparing our model against a single human player on the same rounds. Our model achieves lower median distance error (549.8~km vs 849.0~km) and higher GeoGuessr scores (3459 vs 2830 median). The human shows high variance (849~km median but 2643~km mean), suggesting reliance on domain knowledge that differs from learned patterns. Note this comparison is preliminary (n=1 human, 25 rounds) and requires expanded evaluation for robust conclusions.
+Table~\ref{tab:human_comparison} presents results comparing our model against a human baseline, represented by an experienced player (the lead author) familiar with GeoGuessr mechanics, on the same rounds. Our model achieves lower median distance error (549.8~km vs 849.0~km) and higher GeoGuessr scores (3459 vs 2830 median). The human shows high variance (849~km median but 2643~km mean), suggesting reliance on domain knowledge that differs from learned patterns. Note this comparison is preliminary (n=1 human, the lead author, 25 rounds) and requires expanded evaluation for robust conclusions.
 
 \begin{table}[h!]
 \centering
@@ -457,10 +457,9 @@ We evaluate three conditions by manipulating the pairing between these inputs:
 
 This design isolates each modality's contribution: if the model relies heavily on a particular modality, shuffling it will cause large performance degradation because the model receives features from a mismatched image. For each condition, we compute the haversine distance between predicted and ground-truth coordinates for all samples in the validation set, and report the median error as a robust summary statistic.
 
-Table~\ref{tab:swap_shuffle} presents the results. Shuffling concept embeddings increases median error from 28.6~km to 8340.5~km, which is 291$\times$ degradation in performance. Given that Earth's mean radius is approximately 6,371~km \parencite{Moritz1980}, an 8340~km median error indicates predictions are effectively random across the globe. In contrast, shuffling patch tokens causes only 1.35$\times$ degradation to 38.6~km, a modest 10~km increase from baseline.
+Table~\ref{tab:swap_shuffle} presents the results. Shuffling concept embeddings increases median error from 28.6~km to 8340.5~km, a 291$\times$ degradation. Given Earth's mean radius of approximately 6,371~km, an 8340~km median error indicates predictions are effectively random across the globe. In contrast, shuffling patch tokens causes only 1.35$\times$ degradation to 38.6~km, a modest 10~km increase from baseline.
 
-This asymmetry provides strong evidence that our Concept Bottleneck Model architecture functions as intended: geolocation predictions 
-flow through the semantic concept bottleneck rather than bypassing it via low-level visual shortcuts. The Stage~1 text-prototype classifier extracts meaningful geographic indicators, such as script type (Cyrillic, Latin, Arabic), road features (signs, lane markings), vegetation, and architectural style, which act as the primary cues for inferring location. Meanwhile, the image patch cross-attention mechanism adds spatial detail, allowing the model to focus on fine-grained aspects like sign variants or pavement textures that help distinguish geographically close, semantically similar scenes.
+This asymmetry provides strong evidence that our Concept Bottleneck Model architecture functions as intended: geolocation predictions flow through the semantic concept bottleneck rather than bypassing it via low-level visual shortcuts. The Stage~1 text-prototype classifier extracts meaningful geographic indicators, such as script type (Cyrillic, Latin, Arabic), road features (signs, lane markings), vegetation, and architectural style, which act as the primary cues for inferring location. Meanwhile, the image patch cross-attention mechanism adds spatial detail, allowing the model to focus on fine-grained aspects like sign variants or pavement textures that help distinguish geographically close, semantically similar scenes.
 
 \begin{table}[h!]
     \centering
@@ -473,28 +472,28 @@ flow through the semantic concept bottleneck rather than bypassing it via low-le
         Concept Shuffled & 8340.5 & 291$\times$ \\
         \bottomrule
     \end{tabular}
-    \caption{Swap/shuffle ablation quantifying concept vs.\ image contribution on the validation set. Shuffling concepts causes catastrophic degradation (291$\times$), while shuffling patches causes minimal impact (1.35$\times$), confirming that semantic concepts are the dominant geolocation signal and the CBM bottleneck is not bypassed.}
+    \caption{Swap/Shuffle ablation results.}
     \label{tab:swap_shuffle}
 \end{table}
 
 \paragraph{Concept Prediction Analysis.}
 To understand what geographic indicators the model relies upon, we analyze concept predictions across 3,146 test samples (Figure~\ref{fig:concept_analysis}). The model uses 761 of 2,126 child concepts and 173 of 257 parent concepts, demonstrating selective reliance on discriminative features rather than uniform vocabulary usage. Prediction concentration follows a long-tail distribution: the top 10 concepts account for 16.3\% of all predictions, while 1,365 concepts are never predicted.
 
-Infrastructure-related concepts dominate predictions, with ``Bollard'' and ``Roadlines'' each comprising 2.5\% of predictions, followed by ``Unique Car'' (1.7\%) and ``Mountains'' (1.5\%). At the parent level, ``building\_facade'' (5.3\%), ``bollard\_design'' (3.7\%), ``road\_sign'' (3.6\%), and ``script\_latin'' (3.6\%) are most frequent, reflecting the model's reliance on human-built infrastructure as primary geographic discriminators.
+Infrastructure-related concepts dominate predictions. ``Bollard'' and ``Roadlines'' are tied as the most frequent (78 predictions each, 2.5\%), followed by ``Unique Car'' (52, 1.7\%), ``Rifts'' (51, 1.6\%), and ``Mountains'' (47, 1.5\%). Regional identifiers also appear prominently: ``Ten Digit Yellow Pole Codes'' (45), ``Chevrons'' (37), and location-specific concepts like ``Chilo\'{e} Island'' (33) and ``Baden-W\"{u}rttemberg'' (26).
 
-Average prediction confidence is 0.12 for child concepts and 0.29 for parent concepts. Notably, frequently predicted concepts exhibit higher confidence (e.g., ``Roadlines'': 0.28, ``Ten Digit Yellow Pole Codes'': 0.24), suggesting the model has learned robust representations for common visual patterns. The correlation between prediction frequency and confidence indicates that rarely predicted concepts may represent edge cases where the model is less certain.
+Confidence scores reveal which concepts the model predicts most reliably. ``Roadlines'' exhibits the highest average confidence (0.28), followed by ``Ten Digit Yellow Pole Codes'' (0.24) and ``Unique car'' (0.20). Notably, prediction frequency does not always correlate with confidence: ``Bollard'' ranks first in frequency but only achieves 0.17 confidence, while ``trident'' has moderate frequency (36) but low confidence (0.08). This suggests the model has learned robust representations for distinctive visual patterns like road markings and pole codes, while more ambiguous concepts like architectural features show lower certainty.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{concept_analysis_stage2/top_concepts.png}
-    \caption{Top 30 predicted child concepts (left) and their average confidence scores (right). Infrastructure concepts dominate, with confidence correlating with prediction frequency.}
+    \caption{Top 30 predicted child concepts by frequency (left) and their average confidence scores (right).}
     \label{fig:concept_analysis}
 \end{figure}
 
 \paragraph{Qualitative Interpretability and Failure Cases.}
 Figures~\ref{fig:interpretability_example_b} and~\ref{fig:interpretability_example_a} (Appendix~\ref{app:interpretability}) present successful predictions with per-image interpretability outputs: input panorama, patch attention heatmaps, geographic predictions, gate values, and hierarchical concept predictions. The model identifies scene-level attributes correlating with geographic regions, with attention concentrating on semantically relevant regions.
 
-Failure case analysis highlights several consistent error patterns in the model's predictions (Figures~\ref{fig:failure_french} and~\ref{fig:failure_bollard}). In Figure~\ref{fig:failure_french}, the model predicts Tunisia as the location but assigns high activations to concepts such as ``French Infrastructure'' and ``Chevrons,'' even though there is little visual evidence of these features in the scene. This suggests that image or model priors are influencing concept prediction, causing the model to invoke concepts based on contextual expectation or prior associations with Tunisia rather than faithfully representing the visual input. The model appears to predict concepts it expects to see instead of those that are actually present in the image. In Figure~\ref{fig:failure_bollard}, the model incorrectly predicts ``Bollards'' and ``Austrian bollards'' in a setting that does not feature any bollards, apparently influenced by visual cues such as the camera's shadow or generalized landscape patterns that the model has learned to associate with Central Europe. These examples illustrate two major types of failure: (1) concept prediction driven by dataset or model priors rather than true visual evidence, and (2) concept hallucination, in which landscape or distinct features that mislead model predictions.
+Failure case analysis highlights several consistent error patterns in the model's predictions (Figures~\ref{fig:failure_french} and~\ref{fig:failure_bollard}). In Figure~\ref{fig:failure_french}, the model predicts Tunisia as the location but assigns high activations to concepts such as ``French Infrastructure'' and ``Chevrons,'' even though there is little visual evidence of these features in the scene. This suggests that model priors influence concept prediction, causing the model to invoke concepts based on contextual expectations rather than faithfully representing the visual input. The model appears to predict concepts it expects to see instead of those that are actually present in the image. In Figure~\ref{fig:failure_bollard}, the model incorrectly predicts ``Bollards'' and ``Austrian bollards'' in a scene containing no bollards, apparently influenced by the camera's shadow or generalized landscape patterns associated with Central Europe in the training data. These examples illustrate two major failure types: (1) concept prediction driven by dataset or model priors rather than true visual evidence, and (2) concept hallucination, where landscape features or visual artifacts mislead predictions in the absence of distinctive geographic indicators.
 
 %-------------------------------------------------------------------------------
 %	DISCUSSION
