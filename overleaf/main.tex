@@ -560,7 +560,7 @@ Future directions include: (1) expanding the dataset for improved concept covera
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{game-analysis/round_04_110256_concepts-french-infrastructure-failure-case.png}
-    \caption{Failure case: French infrastructure misattribution. The model correctly identifies ``French Infrastructure'' and ``Chevrons'' concepts but predicts Tunisia (35.4$^\circ$N, 10.2$^\circ$E) instead of the actual location. This illustrates colonial-era infrastructure creating misleading geographic associations.}
+    \caption{Failure case: French infrastructure misattribution. The model correctly predicts Tunisia but assigns high activations to ``French Infrastructure'' and ``Chevrons'' concepts, indicating that the model is influenced by model priors rather than the visual input. This illustrates colonial-era infrastructure creating misleading geographic associations.}
     \label{fig:failure_french}
 \end{figure}
 
