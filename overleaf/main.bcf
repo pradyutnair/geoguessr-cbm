@@ -2361,4 +2361,96 @@
     <bcf:citekey order="13">muller2018geolocation</bcf:citekey>
     <bcf:citekey order="14">haas2024pigeon</bcf:citekey>
     <bcf:citekey order="15">radford2021learning</bcf:citekey>
-    <bcf:citekey order="16">street
+    <bcf:citekey order="16">streetclip2023</bcf:citekey>
+    <bcf:citekey order="17">cepeda2023geoclip</bcf:citekey>
+    <bcf:citekey order="18">toker2021satellite_cvpr</bcf:citekey>
+    <bcf:citekey order="19">koh2020concept</bcf:citekey>
+    <bcf:citekey order="20">yang2023language</bcf:citekey>
+    <bcf:citekey order="21">yuksekgonul2022posthoc</bcf:citekey>
+    <bcf:citekey order="22">vandenhirtz2024stochastic</bcf:citekey>
+    <bcf:citekey order="23">chauhan2023interactive</bcf:citekey>
+    <bcf:citekey order="24">jia2025interpretable</bcf:citekey>
+    <bcf:citekey order="25">bengio2009curriculum</bcf:citekey>
+    <bcf:citekey order="26">learnablemeta</bcf:citekey>
+    <bcf:citekey order="27">s2geometry</bcf:citekey>
+    <bcf:citekey order="28">biljecki2021street</bcf:citekey>
+    <bcf:citekey order="28">wang2025street</bcf:citekey>
+    <bcf:citekey order="29">oord2018infonce</bcf:citekey>
+    <bcf:citekey order="30">lin2017focal</bcf:citekey>
+    <bcf:citekey order="31">loshchilov2017adamw</bcf:citekey>
+    <bcf:citekey order="32">vaswani2017attention</bcf:citekey>
+    <bcf:citekey order="33">srivastava2015highway</bcf:citekey>
+    <bcf:citekey order="33">arevalo2017gated</bcf:citekey>
+    <bcf:citekey order="34">perez2018film</bcf:citekey>
+    <bcf:citekey order="35">fren-gor-geoguessr</bcf:citekey>
+    <bcf:citekey order="36">hays2008im2gps</bcf:citekey>
+    <bcf:citekey order="37">li2024visual</bcf:citekey>
+    <bcf:citekey order="38">weyand2016planet</bcf:citekey>
+    <bcf:citekey order="39">muller2018geolocation</bcf:citekey>
+    <bcf:citekey order="40">seo2018cpl</bcf:citekey>
+    <bcf:citekey order="41">haas2024pigeon</bcf:citekey>
+    <bcf:citekey order="42">s2geometry</bcf:citekey>
+    <bcf:citekey order="43">pramanick2022world</bcf:citekey>
+    <bcf:citekey order="44">radford2021learning</bcf:citekey>
+    <bcf:citekey order="45">streetclip2023</bcf:citekey>
+    <bcf:citekey order="46">cepeda2023geoclip</bcf:citekey>
+    <bcf:citekey order="47">toker2021satellite_cvpr</bcf:citekey>
+    <bcf:citekey order="48">koh2020concept</bcf:citekey>
+    <bcf:citekey order="49">yang2023language</bcf:citekey>
+    <bcf:citekey order="50">yuksekgonul2022posthoc</bcf:citekey>
+    <bcf:citekey order="51">vandenhirtz2024stochastic</bcf:citekey>
+    <bcf:citekey order="52">chauhan2023interactive</bcf:citekey>
+    <bcf:citekey order="53">jia2025interpretable</bcf:citekey>
+    <bcf:citekey order="54">bengio2009curriculum</bcf:citekey>
+    <bcf:citekey order="55">learnablemeta</bcf:citekey>
+    <bcf:citekey order="56">biljecki2021street</bcf:citekey>
+    <bcf:citekey order="57">wang2025street</bcf:citekey>
+    <bcf:citekey order="58">oord2018infonce</bcf:citekey>
+    <bcf:citekey order="59">lin2017focal</bcf:citekey>
+    <bcf:citekey order="60">loshchilov2017adamw</bcf:citekey>
+    <bcf:citekey order="61">vaswani2017attention</bcf:citekey>
+    <bcf:citekey order="62">srivastava2015highway</bcf:citekey>
+    <bcf:citekey order="63">arevalo2017gated</bcf:citekey>
+    <bcf:citekey order="64">perez2018film</bcf:citekey>
+    <bcf:citekey order="65">fren-gor-geoguessr</bcf:citekey>
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="nyt">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">presort</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2" final="1">
+      <bcf:sortitem order="1">sortkey</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="3">
+      <bcf:sortitem order="1">sortname</bcf:sortitem>
+      <bcf:sortitem order="2">author</bcf:sortitem>
+      <bcf:sortitem order="3">editor</bcf:sortitem>
+      <bcf:sortitem order="4">translator</bcf:sortitem>
+      <bcf:sortitem order="5">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="6">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="4">
+      <bcf:sortitem order="1">sortyear</bcf:sortitem>
+      <bcf:sortitem order="2">year</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="5">
+      <bcf:sortitem order="1">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="2">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="6">
+      <bcf:sortitem order="1">volume</bcf:sortitem>
+      <bcf:sortitem literal="1" order="2">0</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="nyt/global//global/global"
+                type="entry"
+                sortingtemplatename="nyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>
